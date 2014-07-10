@@ -30,7 +30,7 @@ The chart below is the Morse code tree and is really helpful when listening/deco
 
 ![listening](./images/morse_listening.png)
 
-Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find this hard. It's always tricky to start with. As with many things, the more you do it the easier it gets.
+Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find this hard. It's always tricky to start with. As with many things, the more you do it the easier it gets. In this resource we're going to program the Raspberry Pi to help you learn how to do this. You're going to build your own learning tool for Morse Code, so let's get set up.
 
 ## Step 0: Setting Up your Pi
 
