@@ -1,4 +1,5 @@
-morse-code
-==========
+# Morse Code on your Raspberry Pi
 
-Learn morse code for the centenary of World War I
+How to program your Raspberry Pi to send, recieve and decode Morse.
+
+![](./images/cover.jpg)
