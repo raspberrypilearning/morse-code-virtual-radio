@@ -24,10 +24,35 @@ So there are three aspects to Morse
   - Being able to key it in
   - Being able to decode it when listening
 
-The choice of the dot and dash sequence for each letter is not random. Samuel Morse chose them based on how often letters occurred in the English language used in his local newspaper. The more commonly used a letter the fewer dots and dashes he chose, thereby making it faster to key in.
+The choice of the dot and dash sequence for each letter is not random. Samuel Morse chose them based on how often letters occurred in the English language used by his local newspaper. The more commonly used a letter was the fewer dots and dashes he chose, thereby making it faster to key in.
 
 The chart below is the Morse code tree and is really helpful when listening/decoding, you might want to print it out and have it always in front of you. You can see that **E** and **T** are the most common letters. So you start at the top, go to the *left* if you hear a dot and to the *right* if you hear a dash. You can double check this against the first chart, try it now for the letters **A** and **B**.
 
 ![listening](./images/morse_listening.png)
 
-Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find that decoding it is hard. It's always tricky to start with. As with many things, the more you do it the easier it gets.
+Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find this hard. It's always tricky to start with. As with many things, the more you do it the easier it gets.
+
+## Step 0: Setting Up your Pi
+
+First check that you have all the parts you need to get your Raspberry Pi set up and working.
+
+- Raspberry Pi
+- Micro USB power adaptor
+- An SD card with Raspbian already set up through NOOBS
+- USB keyboard
+- USB mouse
+- HDMI cable
+- A monitor or TV
+
+### Activity Checklist:
+
+1. Place the SD card into the slot of your Raspberry Pi. It will only fit one way so be careful not to break the card.
+2. Next connect the HDMI cable from the monitor (or TV) to the HDMI port on the Pi and turn on your monitor.
+3. Plug the USB keyboard and mouse into the USB ports on the Pi.
+4. Plug in the micro USB power supply and you should see some text appear on your screen.
+5. When prompted to login type:
+
+    ```bash
+    Login: pi
+    Password: raspberry
+    ```
