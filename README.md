@@ -23,8 +23,6 @@ This year marks the 100th anniversary of the declaration of [World War 1](http:/
 
 ## Requirements
 
-As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need:
-
 ### Hardware
 
 - Raspberry Pi
