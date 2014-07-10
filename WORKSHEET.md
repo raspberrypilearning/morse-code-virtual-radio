@@ -30,4 +30,4 @@ The chart below is the Morse code tree and is really helpful when listening/deco
 
 ![listening](./images/morse_listening.png)
 
-Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3).
+Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find that decoding it is hard. It's always tricky to start with. As with many things, the more you do it the easier it gets.
