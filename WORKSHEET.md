@@ -5,7 +5,8 @@
 Invented by [Samuel Morse](http://en.wikipedia.org/wiki/Samuel_F._B._Morse) in the year 1836, Morse Code is a method for sending and receiving text messages using short and long beeps. Conventionally a short beep is called a *dot* and a long one is a *dash* (also known as a *dit* and a *dah*). Every letter of the alphabet has a unique sequence of dots and dashes.
 
 If you look at the chart below, the letter **A** is beep beeeeeep.
-The letter **D** is beeeeeep beep beep.
+
+The letter **B** is beeeeeep beep beep beep.
 
 ![](./images/morse.png)
 
