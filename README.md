@@ -56,6 +56,8 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 - [The worksheet](WORKSHEET.md)
 
+*Note: This resources uses International Morse.*
+
 ## Licence
 
 Unless otherwise specified, everything in this repository is covered by the following licence:
