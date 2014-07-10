@@ -15,6 +15,6 @@ The letter **B** is beeeeeep beep beep beep.
 - Letters in a word have a slightly longer short gap of silence between them
 - Words have an even longer gap of silence between them
 
-[Listen to slow Morse Code](./sounds/slow_morse.mp3)
+[Listen to slow Morse Code](https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/sounds/slow_morse.mp3)
 
 You don't necessarily need to use beeps for this, although this is the most common way for Morse Code. You can do it with anything that can be turned on and off. You could use a torch, flash an LED or even just blink your eyes fast and slow.
