@@ -40,15 +40,17 @@ This year marks the 100th anniversary of the declaration of [World War 1](http:/
 
 - python-pygame
 
-### Extras
+### Extras: A Morse Code key
 
-![](./images/MFJ-550.png)
+A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online, see the link above.
 
-- A Morse Code key (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
+- Buy online (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
 
-  A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online, see the link above.
+  ![](./images/MFJ-550.png)
 
+- Make your own!
 
+  ![](./images/homebrew_key.png)
 
 ### Time required
 
