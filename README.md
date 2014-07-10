@@ -42,6 +42,14 @@ As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need
 
 - python-pygame
 
+### Extras
+
+A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternately you can also buy one online, see the link below.
+
+![](./images/MFJ-550.png)
+
+- A Morse Code key (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
+
 ### Time required
 
 - 2 to 3 hours
