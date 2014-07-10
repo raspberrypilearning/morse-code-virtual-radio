@@ -1,10 +1,10 @@
-# Morse Code on your Raspberry Pi
+# Morse Code Virtual Radio
 
 How to program your Raspberry Pi to send, recieve and decode Morse.
 
 ![](./images/cover.png)
 
-This year marks the 100th anniversary of the declaration of World War 1, also known as *The Great War*.  The war began on the 28th of July 1914.  To commemorate this event we've come up with a way for you to replicate and play with the main form of radio communication that was around back then ago using your Raspberry Pi.
+This year marks the 100th anniversary of the declaration of ![World War 1](http://en.wikipedia.org/wiki/World_War_I), also known as *The Great War*.  The war began on the 28th of July 1914.  To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then.
 
 ## Lesson objectives
 
@@ -23,13 +23,28 @@ This year marks the 100th anniversary of the declaration of World War 1, also kn
 
 ## Requirements
 
-As well as your Raspberry Pi and all its standard peripherals, you'll need:
+As well as a Raspberry Pi with an SD card loaded with Raspbian, you'll also need:
 
 ### Hardware
 
+- Raspberry Pi
+- Micro USB power adaptor
+- An SD Card with Raspbian already set up through NOOBS
+- USB keyboard
+- USB mouse
+- HDMI cable
+- Ethernet cable
+- LAN with Internet connection
+- A monitor or TV
+- **Male** to **Female** jumper wires, at least 2 (try [Pimoroni](http://shop.pimoroni.com/products/jumper-jerky))
+
 ### Software
 
+- python-pygame
+
 ### Time required
+
+- 2 to 3 hours
 
 ## Worksheet & included files
 
