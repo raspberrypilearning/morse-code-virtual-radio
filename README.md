@@ -4,7 +4,7 @@ How to program your Raspberry Pi to send, recieve and decode Morse.
 
 ![](./images/cover.png)
 
-This year marks the 100th anniversary of the declaration of ![World War 1](http://en.wikipedia.org/wiki/World_War_I), also known as *The Great War*.  The war began on the 28th of July 1914.  To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then.
+This year marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I), also known as *The Great War*.  The war began on the 28th of July 1914.  To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then.
 
 ## Lesson objectives
 
