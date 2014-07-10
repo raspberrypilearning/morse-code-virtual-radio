@@ -42,11 +42,11 @@ This year marks the 100th anniversary of the declaration of [World War 1](http:/
 
 ### Extras
 
-A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternately you can also buy one online, see the link below.
+- A Morse Code key (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
+
+A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online, see the link below.
 
 ![](./images/MFJ-550.png)
-
-- A Morse Code key (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
 
 ### Time required
 
