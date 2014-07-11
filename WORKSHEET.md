@@ -132,7 +132,9 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 ##Step 2: Wire up the Morse Code key to the GPIO pins
 
-All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing the circuit to be completed. The effect would be the same if you just touched the two bare wires together.
+### The Theory
+
+All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a short circuit. The effect would be the same if you just touched the two bare wires together.
 
 So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage coming from something. So since we want to detect the key being pressed we're going to use input mode.
 
@@ -140,9 +142,26 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
 
 - A pull up circuit
 
-  Here we hard wire the pin to 3.3 volts so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+  Wire the GPIO pin to 3.3 volts through a large 10kΩ resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+
+  ![](./images/pull_up.png)
 
 - A pull down circuit
 
-  Here we wire the pin to ground so that it always reads LOW. Then we can short the pin to 3.3 volts through the key so that it goes HIGH when you press it.
+  Wire the GPIO pin to ground through a large 10kΩ resistor so that it always reads LOW. Then we can short the pin to 3.3 volts through the Morse key so that it goes HIGH when you press it. When the key is pressed there is a lower resistance path to 3.3 volts and therefore the pin will read HIGH. 
 
+  ![](./images/pull_down.png)
+  
+  *Note: The 1kΩ resistor is there in both circuits to give the GPIO pin a failsafe protection in case we mistakenly set the pin to be in OUTPUT mode.*
+
+Fortunately the Raspberry Pi has this circuitry **built in** and we can select a pull up or down circuit in our code for each GPIO pin. So you can get away with just using two jumper wires here, although you're welcome to wire it up the proper way shown above if you wish.
+
+### The Practise
+
+- Pull up configuration
+
+  ![](./images/pull_up_key.png) 
+
+- Pull down configuration
+
+  ![](./images/pull_down_key.png) 
