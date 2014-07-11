@@ -119,6 +119,7 @@ tone_obj.play(-1) #the -1 means to loop the sound
 time.sleep(2)
 tone_obj.stop()
 ```
+Press *Ctrl - O* then *Enter* to save followed by *Ctrl - X* to quit from editing.
 Next mark the file as executable with the following command:
 
 `chmod +x morse-code.py`
@@ -127,3 +128,4 @@ Now we can run the code, you should hear a nice two second long beep.
 
 `./morse-code.py`
 
+If you didn't hear anything then double check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect audio. You may notice the tone sounds a bit wobbly at the start, this is just an artefact of pygame starting up and using up CPU cycles.  Subsequent tones that we make will sound correct.
