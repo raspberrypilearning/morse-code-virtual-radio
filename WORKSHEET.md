@@ -130,7 +130,19 @@ Now we can run the code, you should hear a nice two second long beep.
 
 If you didn't hear anything then double check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start, this is just an artefact of pygame starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
 
-##Step 2: Wire up the Morse Code key to the GPIO
+##Step 2: Wire up the Morse Code key to the GPIO pins
 
-To connect your Morse Key to the GPIO pins we need to do a bit of physical computing. Our goal here is to make one of the GPIO pins go HIGH or LOW when we press and release the Morse Key. We can then detect that in our code and start and stop the tone sound accordingly.
+All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing the circuit to be completed. The effect would be the same if you just touched the two bare wires together.
+
+So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage coming from something. So since we want to detect the key being pressed we're going to use input mode.
+
+When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is down or the key is up. So we need to fix the voltage level of the pin so that it is no longer floating. We can do it in to ways:
+
+- A pull up circuit
+
+  Here we hard wire the pin to 3.3 volts so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+
+- A pull down circuit
+
+  Here we wire the pin to ground so that it always reads LOW. Then we can short the pin to 3.3 volts through the key so that it goes HIGH when you press it.
 
