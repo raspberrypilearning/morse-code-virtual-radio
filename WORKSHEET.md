@@ -186,7 +186,7 @@ Add `RPi.GPIO as GPIO` to the import line at the top so that it reads:
 
 `import pygame, time, RPi.GPIO as GPIO`
 
-At the bottom remove these lines (they are no longer needed right now):
+At the bottom remove these lines (they will be put back in again later):
 ```python
 tone_obj.play(-1)
 time.sleep(2)
@@ -215,14 +215,13 @@ If you're using a pull up the program should show HIGH when the key is up. Hold 
 HIGH
 HIGH
 HIGH
-HIGH
 LOW
 LOW
 LOW
-LOW
-HIGH
 HIGH
 HIGH
 HIGH
 ```
 Press `Ctrl - C` to quit.
+
+##Step 4: Play a tone when they key is down
