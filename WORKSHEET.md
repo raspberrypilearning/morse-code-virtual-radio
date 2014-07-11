@@ -136,7 +136,7 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 All Morse Code keys work in a similar way to a normal push button or switch. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
 
-So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage coming from something. So since we want to detect the key being pressed we're going to use input mode.
+So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage either coming or going. So since we want to detect the key being pressed we're going to use input mode.
 
 When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is down or the key is up. So we need to fix the voltage level of the pin so that it is no longer floating. We can do it in two ways:
 
@@ -156,7 +156,7 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
 
 ### The Practise
 
-Fortunately the Raspberry Pi has all the above circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. This sets up some magic internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
+Fortunately the Raspberry Pi has all the above circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
 
 - Pull up configuration
 
