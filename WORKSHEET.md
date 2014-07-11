@@ -207,8 +207,10 @@ while True:
 ```
 Press *Ctrl - O* then *Enter* to save followed by *Ctrl - X* to quit from editing.
 GPIO functions require root access on your Pi so from now on you must use the sudo command to run your code.
+
 `sudo ./morse-code.py`
-If you're using a pull up the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down.
+
+If you're using a pull up the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down. The output should look something like this:
 ```bash
 HIGH
 HIGH
