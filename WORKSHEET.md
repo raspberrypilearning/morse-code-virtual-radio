@@ -154,18 +154,18 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
   
   *Note: The 1kΩ resistor is there in both circuits to give the GPIO pin a failsafe protection in case we mistakenly set the pin to be in OUTPUT mode.*
 
-Fortunately the Raspberry Pi has this circuitry **built in** and we can select a pull up or down circuit in our code for each GPIO pin. So you can get away with just using two jumper wires here, although you're welcome to wire it up the proper way shown above if you wish.
-
 ### The Practise
+
+Fortunately the Raspberry Pi has this circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. So you can get away with just using two jumper wires here, although you're welcome to wire it up the proper way shown above if you wish.
 
 - Pull up configuration
 
-  This GPIO pin will be wired to 3.3 volts using the internal pull up resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+  This GPIO pin #7 will be wired to 3.3 volts using the internal pull up resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
 
   ![](./images/pull_up_key.png) 
 
 - Pull down configuration
 
-  This GPIO pin will be wired to ground using the internal pull down resistor so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse Key so that the pin will go HIGH when you press it.
+  This GPIO pin #7 will be wired to ground using the internal pull down resistor so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse Key so that the pin will go HIGH when you press it.
 
   ![](./images/pull_down_key.png) 
