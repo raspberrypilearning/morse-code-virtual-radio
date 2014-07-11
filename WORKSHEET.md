@@ -140,9 +140,13 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
 
 - A pull up circuit
 
-  Here we hard wire the pin to 3.3 volts so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+  ![](./images/pull_up.png)
+
+  We hard wire the pin to 3.3 volts so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
 
 - A pull down circuit
 
-  Here we wire the pin to ground so that it always reads LOW. Then we can short the pin to 3.3 volts through the key so that it goes HIGH when you press it.
+  ![](./images/pull_down.png)
+  
+  We hard wire the pin to ground so that it always reads LOW. Then we can short the pin to 3.3 volts through the Morse key so that it goes HIGH when you press it.
 
