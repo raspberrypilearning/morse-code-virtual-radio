@@ -160,8 +160,12 @@ Fortunately the Raspberry Pi has this circuitry **built in** and we can select a
 
 - Pull up configuration
 
+  This GPIO pin will be wired to 3.3 volts using the internal pull up resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+
   ![](./images/pull_up_key.png) 
 
 - Pull down configuration
+
+  This GPIO pin will be wired to ground using the internal pull down resistor so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse Key so that the pin will go HIGH when you press it.
 
   ![](./images/pull_down_key.png) 
