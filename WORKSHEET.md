@@ -57,9 +57,9 @@ First check that you have all the parts you need to get your Raspberry Pi set up
     Password: raspberry
     ```
 
-## Step 1: Making some test beeps
+## Step 1: Play some test beeps
 
-If you are using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
+Headphones are advisable in a classroom environment so that the room doesn't descend into a cacophony of beep noise. If you *are* using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
 
 `sudo amixer cset numid=3 1`
 
@@ -128,4 +128,9 @@ Now we can run the code, you should hear a nice two second long beep.
 
 `./morse-code.py`
 
-If you didn't hear anything then double check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect audio. You may notice the tone sounds a bit wobbly at the start, this is just an artefact of pygame starting up and using up CPU cycles.  Subsequent tones that we make will sound correct.
+If you didn't hear anything then double check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start, this is just an artefact of pygame starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
+
+##Step 2: Wire up the Morse Code key to the GPIO
+
+To connect your Morse Key to the GPIO pins we need to do a bit of physical computing. Our goal here is to make one of the GPIO pins go HIGH or LOW when we press and release the Morse Key. We can then detect that in our code and start and stop the tone sound accordingly.
+
