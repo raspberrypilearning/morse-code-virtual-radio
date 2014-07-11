@@ -75,7 +75,6 @@ Enter the following command to start editing a blank file:
 `sudo nano morse-code.py`
 
 Now either copy and paste or enter the following code:
-
 ```python
 #!/usr/bin/python
 import pygame
