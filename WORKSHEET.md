@@ -119,7 +119,7 @@ tone_obj.play(-1) #the -1 means to loop the sound
 time.sleep(2)
 tone_obj.stop()
 ```
-Press *Ctrl - O* then *Enter* to save followed by *Ctrl - X* to quit from editing.
+Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
 Next mark the file as executable with the following command:
 
 `chmod +x morse-code.py`
@@ -205,8 +205,8 @@ while True:
     print "HIGH" if reading else "LOW"
     time.sleep(1)
 ```
-Press *Ctrl - O* then *Enter* to save followed by *Ctrl - X* to quit from editing.
-GPIO functions require root access on your Pi so from now on you must use the sudo command to run your code.
+Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
+GPIO functions require root access on your Pi so from now on you must use the `sudo` command to run your code.
 
 `sudo ./morse-code.py`
 
@@ -225,3 +225,4 @@ HIGH
 HIGH
 HIGH
 ```
+Press `Ctrl - C` to quit.
