@@ -134,11 +134,11 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 ### The Theory
 
-All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a short circuit. The effect would be the same if you just touched the two bare wires together.
+All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
 
 So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage coming from something. So since we want to detect the key being pressed we're going to use input mode.
 
-When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is down or the key is up. So we need to fix the voltage level of the pin so that it is no longer floating. We can do it in to ways:
+When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is down or the key is up. So we need to fix the voltage level of the pin so that it is no longer floating. We can do it in two ways:
 
 - A pull up circuit
 
@@ -156,16 +156,22 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
 
 ### The Practise
 
-Fortunately the Raspberry Pi has this circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. So you can get away with just using two jumper wires here, although you're welcome to wire it up the proper way shown above if you wish.
+Fortunately the Raspberry Pi has all the above circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. This sets up some magic internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
 
 - Pull up configuration
 
-  This GPIO pin #7 will be wired to 3.3 volts using the internal pull up resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
+  GPIO pin #7 will be wired to 3.3 volts using the internal pull up resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse Key so that the pin will go LOW when you press it.
 
   ![](./images/pull_up_key.png) 
 
 - Pull down configuration
 
-  This GPIO pin #7 will be wired to ground using the internal pull down resistor so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse Key so that the pin will go HIGH when you press it.
+  GPIO pin #7 will be wired to ground using the internal pull down resistor so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse Key so that the pin will go HIGH when you press it.
 
   ![](./images/pull_down_key.png) 
+
+Neither way is any more correct than the other and which one people use is often just personal preference. Take the two jumper wires and screw the male ends into the terminal blocks on your Morse Code key. On some very old antique keys this can be a tricky operation.
+
+  ![](./images/jumper_wires_key.png) 
+
+Choose which pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. Make a note of which configuration you're using as you'll need to incorporate it into your programming later.
