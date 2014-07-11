@@ -57,7 +57,7 @@ First check that you have all the parts you need to get your Raspberry Pi set up
     Password: raspberry
     ```
 
-## Step 1: Play some test beeps
+## Step 1: Play a test beep
 
 Headphones are advisable in a classroom environment so that the room doesn't descend into a cacophony of beep noise. If you *are* using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
 
@@ -175,3 +175,51 @@ Neither way is any more correct than the other and which one people use is often
 ![](./images/jumper_wires_key.png) 
 
 Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. Use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
+
+## Step 3: Write code to detect the key press
+
+Enter the following command to edit our previous tone program:
+
+`nano morse-code.py`
+
+Add `RPi.GPIO as GPIO` to the import line at the top so that it reads:
+
+`import pygame, time, RPi.GPIO as GPIO`
+
+At the bottom remove these lines (they are no longer needed right now):
+```python
+tone_obj.play(-1)
+time.sleep(2)
+tone_obj.stop()
+```
+Either copy and paste or enter code below. Note the `GPIO.setup` command, this line is doing two things. It is setting pin 7 as an input *and* setting the internal pull up resistor on it. If you want to use the pull down resitor you'll need to use `GPIO.PUD_DOWN` instead.
+
+There is then a while loop which continually reads the state of pin 7 and prints HIGH or LOW to the screen every 1 second.
+```python
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+while True:
+    reading = GPIO.input(pin)
+    print "HIGH" if reading else "LOW"
+    time.sleep(1)
+```
+Press *Ctrl - O* then *Enter* to save followed by *Ctrl - X* to quit from editing.
+GPIO functions require root access on your Pi so from now on you must use the sudo command to run your code.
+`sudo ./morse-code.py`
+If you're using a pull up the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down.
+```bash
+HIGH
+HIGH
+HIGH
+HIGH
+LOW
+LOW
+LOW
+LOW
+HIGH
+HIGH
+HIGH
+HIGH
+```
