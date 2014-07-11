@@ -172,6 +172,6 @@ Fortunately the Raspberry Pi has all the above circuitry *built in* and we can s
 
 Neither way is any more correct than the other and which one people use is often just personal preference. Take the two jumper wires and screw the male ends into the terminal blocks on your Morse Code key. On some very old antique keys this can be a tricky operation.
 
-  ![](./images/jumper_wires_key.png) 
+![](./images/jumper_wires_key.png) 
 
-Choose which pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. To save confusion let's use GPIO pin number 7 (as in the diagrams above). *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
+Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. Use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
