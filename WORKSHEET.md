@@ -134,7 +134,7 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 ### The Theory
 
-All Morse Code keys work in a similar way to a normal push button. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
+All Morse Code keys work in a similar way to a normal push button or switch. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
 
 So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage coming from something. So since we want to detect the key being pressed we're going to use input mode.
 
