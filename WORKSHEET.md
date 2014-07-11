@@ -77,7 +77,7 @@ Enter the following command to start editing a blank file:
 Now either copy and paste or enter the following code:
 ```python
 #!/usr/bin/python
-import pygame
+import pygame, time
 from array import array
 from pygame.locals import *
 
@@ -97,4 +97,16 @@ class ToneSound(pygame.mixer.Sound):
             else:
                 samples[time] = -amplitude
         return samples
+```
+Don't worry if you've never seen a python class before. A class is like a template of code that you can create multiple *instances* of with different characteristics. An instance of a class template is known as an **object**. This class does the job of playing a tone, so we could create multiple objects from the class for different frequencies of tones that we might want to play. Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz.
+
+So lets add some code to create an instance of the class for say an 800 Hz tone.
+In this code `tone_obj` is the instance of the class `ToneSound`. Add the following code to the very bottom of the file:
+
+```python
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+tone_obj.play(-1)
+time.sleep(2)
+tone_obj.stop()
 ```
