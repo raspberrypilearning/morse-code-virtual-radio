@@ -50,6 +50,8 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 - Find an antique (try [eBay](http://search.ebay.co.uk/antique+morse+code+key))
 
+  Make sure it works!
+
   ![](./images/antique_key.png)
 
 - Make your own!
