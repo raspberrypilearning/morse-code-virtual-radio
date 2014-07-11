@@ -68,11 +68,15 @@ First verify that the package is installed using the following command:
 
 `sudo apt-get install python-pygame -y`
 
+If your SD card is up to date you should see the message:
+
+`python-pygame is already the newest version`
+
 Okay now lets do some programming.  I'm going to provide some code to make the tone sound, you don't need to worry about its internal workings. For those of you that are interested though the code just inherits one of the pygame sound classes and automatically generates the wave data for playing a tone at a specified frequency.
 
 Enter the following command to start editing a blank file:
 
-`sudo nano morse-code.py`
+`nano morse-code.py`
 
 Now either copy and paste or enter the following code:
 ```python
@@ -80,6 +84,9 @@ Now either copy and paste or enter the following code:
 import pygame, time
 from array import array
 from pygame.locals import *
+
+pygame.mixer.pre_init(44100, -16, 1, 1024)
+pygame.init()
 
 class ToneSound(pygame.mixer.Sound):
     def __init__(self, frequency, volume):
@@ -98,15 +105,25 @@ class ToneSound(pygame.mixer.Sound):
                 samples[time] = -amplitude
         return samples
 ```
-Don't worry if you've never seen a python class before. A class is like a template of code that you can create multiple *instances* of with different characteristics. An instance of a class template is known as an **object**. This class does the job of playing a tone, so we could create multiple objects from the class for different frequencies of tones that we might want to play. Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz.
+Don't worry if you've never seen a python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
-So lets add some code to create an instance of the class for say an 800 Hz tone.
-In this code `tone_obj` is the instance of the class `ToneSound`. Add the following code to the very bottom of the file:
+
+Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz, so lets go for 800 Hz.
+In this code `tone_obj` is the object that has been created from the blueprint `ToneSound`.
+Add the following code to the very bottom of the file:
 
 ```python
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
-tone_obj.play(-1)
+tone_obj.play(-1) #the -1 means to loop the sound
 time.sleep(2)
 tone_obj.stop()
 ```
+Next mark the file as executable with the following command:
+
+`chmod +x morse-code.py`
+
+Now we can run the code, you should hear a nice two second long beep.
+
+`./morse-code.py`
+
