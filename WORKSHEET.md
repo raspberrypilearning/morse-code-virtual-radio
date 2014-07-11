@@ -174,4 +174,4 @@ Neither way is any more correct than the other and which one people use is often
 
   ![](./images/jumper_wires_key.png) 
 
-Choose which pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. Make a note of which configuration you're using as you'll need to incorporate it into your programming later.
+Choose which pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. To save confusion let's use GPIO pin number 7 (as in the diagrams above). *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
