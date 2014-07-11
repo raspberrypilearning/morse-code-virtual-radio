@@ -151,3 +151,5 @@ When a GPIO pin is in input mode the pin is said to be *floating* meaning that i
   ![](./images/pull_down.png)
   
   *Note: The 1kΩ resistor is there in both circuits to give the GPIO pin a failsafe protection in case we mistakenly set the pin to be in OUTPUT mode.*
+
+Fortunately the Raspberry Pi has this circuitry *built in* and we can select a pull up or down in our code for each GPIO pin. So you can get away with just using two jumper wires here, although you're welcome to wire it up the proper way shown above if you wish.
