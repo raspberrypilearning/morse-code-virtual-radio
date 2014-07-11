@@ -46,13 +46,56 @@ First check that you have all the parts you need to get your Raspberry Pi set up
 
 ### Activity Checklist:
 
-1. Place the SD card into the slot of your Raspberry Pi. It will only fit one way so be careful not to break the card.
-2. Next connect the HDMI cable from the monitor (or TV) to the HDMI port on the Pi and turn on your monitor.
-3. Plug the USB keyboard and mouse into the USB ports on the Pi.
-4. Plug in the micro USB power supply and you should see some text appear on your screen.
-5. When prompted to login type:
+1. Place the SD card into the slot of your Raspberry Pi.
+1. Next connect the HDMI cable from the monitor or TV.
+1. Plug in the USB keyboard and mouse.
+1. Plug in the micro USB power supply.
+1. When prompted to login type:
 
     ```bash
     Login: pi
     Password: raspberry
     ```
+
+## Step 1: Making some test beeps
+
+If you are using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
+
+`sudo amixer cset numid=3 1`
+
+Next we're going to use the python pygame library to make some tone sounds.
+First verify that the package is installed using the following command:
+
+`sudo apt-get install python-pygame -y`
+
+Okay now lets do some programming.  I'm going to provide some code to make the tone sound, you don't need to worry about its internal workings. For those of you that are interested though the code just inherits one of the pygame sound classes and automatically generates the wave data for playing a tone at a specified frequency.
+
+Enter the following command to start editing a blank file:
+
+`sudo nano morse-code.py`
+
+Now either copy and paste or enter the following code:
+
+```python
+#!/usr/bin/python
+import pygame
+from array import array
+from pygame.locals import *
+
+class ToneSound(pygame.mixer.Sound):
+    def __init__(self, frequency, volume):
+        self.frequency = frequency
+        pygame.mixer.Sound.__init__(self, self.build_samples())
+        self.set_volume(volume)
+
+    def build_samples(self):
+        period = int(round(pygame.mixer.get_init()[0] / self.frequency))
+        samples = array("h", [0] * period)
+        amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
+        for time in xrange(period):
+            if time < period / 2:
+                samples[time] = amplitude
+            else:
+                samples[time] = -amplitude
+        return samples
+```
