@@ -107,7 +107,6 @@ class ToneSound(pygame.mixer.Sound):
 ```
 Don't worry if you've never seen a python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
-
 Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz, so lets go for 800 Hz.
 In this code `tone_obj` is the object that has been created from the blueprint `ToneSound`.
 Add the following code to the very bottom of the file:
@@ -136,7 +135,9 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 All Morse Code keys work in a similar way to a normal push button or switch. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
 
-So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. Any GPIO pin can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or a BUZZER. However, input mode is for when you want to detect voltage either coming or going. So since we want to detect the key being pressed we're going to use input mode.
+So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or BUZZER to make it work. In INPUT mode the GPIO pin has a value that we can read in our code. If the pin has voltage going to it the reading will be `1` (HIGH). If the pin was connected directly to ground (e.g. no voltage) the reading will be `0` (LOW). 
+
+So here is the goal: if we wire up the Morse Code key so that it will make a GPIO pin go HIGH and LOW we can then use the reading from the pin to know whether the key has been pressed or not.
 
 When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is down or the key is up. So we need to fix the voltage level of the pin so that it is no longer floating. We can do it in two ways:
 
