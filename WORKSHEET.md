@@ -135,15 +135,15 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 ### The Theory
 
-All Morse Code keys work in a similar way to a normal push button or switch. They have two screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
+All Morse Code keys work in a similar way to a push button or switch. They have two screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the two wires together.
 
-So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or BUZZER. In INPUT mode the GPIO pin has a value that we can read in our code. If the pin has voltage going to it the reading will be `1` *HIGH*. If the pin was connected directly to ground (e.g. no voltage) the reading will be `0` *LOW*. 
+So to connect the Morse Key to the GPIO pins we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is for when you want to supply voltage to something like an LED or buzzer. In INPUT mode the GPIO pin has a value that we can read in our code. If the pin has voltage going to it the reading will be `1` *HIGH*. If the pin was connected directly to ground (no voltage) the reading will be `0` *LOW*. 
 
 So the goal is to use the Morse Code key to switch voltage on and off for a GPIO pin. Thus making the reading of the pin change *in our code* when we press the key.
 
-When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want. We need to categorically know either the key is up or the key is down. So we need to fix the voltage level to HIGH or LOW and then make it change when the key is pressed.
+When a GPIO pin is in input mode the pin is said to be *floating* meaning that it has no fixed voltage level. That's no good for what we want, the pin will randomly float between HIGH and LOW. We need to categorically know either the key is up or down. So we need to fix the voltage level to HIGH or LOW and then make it change *only* when the key is pressed.
 
-We can do it in two ways:
+We can do this in two ways:
 
 - A pull up circuit
 
