@@ -131,6 +131,8 @@ If you didn't hear anything then double check everything is plugged in correctly
 
 ##Step 2: Wire up the Morse Code key to the GPIO pins
 
+![](./images/p1.png)
+
 ### The Theory
 
 All Morse Code keys work in a similar way to a normal push button or switch. They have a couple of screw terminals for attaching a positive and a negative wire. When you press the key down two bits of metal touch causing a circuit to complete. The effect would be the same if you just touched the positive and a negative wires together.
