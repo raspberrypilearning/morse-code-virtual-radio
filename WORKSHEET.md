@@ -280,7 +280,7 @@ Enter the following command to edit our previous tone program:
 `nano morse-code.py`
 
 Leave the `ToneSound` class at the top of your program, scroll to the bottom and add the code above.
-If necessary modify it for your pull up or down configuration.
+If necessary modify it for a pull down configuration.
 
 Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
 You can now test your code. Remember to use `sudo`.
@@ -289,4 +289,6 @@ You can now test your code. Remember to use `sudo`.
 
 After the you see the `Ready` message you should be able to start doing your first Morse Code messages. Give the key a good test to make sure that the tone is only ever on when the key is down and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
 
-Now have a go at a short word. The early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do, the Morse Code for SMS is `...--...`.
+Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do, the Morse Code for SMS is `...--...` and feel free to Google *nokia sms tone* to double check.
+
+##Step 5: Decode the Morse as you go
