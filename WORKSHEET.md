@@ -246,13 +246,15 @@ The most reliable way to do this using the `RPi.GPIO` library is to write a coup
   - Wait for key up
   - Stop playing tone
 
-These functions use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up/down configuration you're using here. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*. So when the pin goes from HIGH to LOW we can finish waiting for the key to be *down* and stop sleeping. Wheas for a pull down it would be *while pin 7 is LOW keep sleeping*.
+These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*. So while the key is up the pin will be HIGH. When the key is pressed the pin goes LOW and we can stop sleeping and start playing the tone. Wheas for a pull down it would be *while pin 7 is LOW keep sleeping*. In order to have a good response time we only need to sleep for a very short amount of time on each iteration of the loop. One hundredth of a second is ideal (0.01 seconds).
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
-
+Have a look at the code below.
 
 ```python
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
 pin = 7
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -266,7 +268,8 @@ def wait_for_keyup(pin):
         time.sleep(.01)
 
 while True:
-    reading = GPIO.input(pin)
-    print "HIGH" if reading else "LOW"
-    time.sleep(1)
+    wait_for_keydown(pin)
+    tone_obj.play(-1) #the -1 means to loop the sound
+    wait_for_keyup(pin)
+    tone_obj.stop()
 ```
