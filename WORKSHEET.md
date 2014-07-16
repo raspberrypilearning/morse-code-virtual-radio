@@ -187,6 +187,7 @@ Enter the following command to edit our previous tone program:
 
 `nano morse-code.py`
 
+To give us access to the GPIO pins in our code we need to import the `RPi.GPIO` library.
 Add `RPi.GPIO as GPIO` to the import line at the top so that it reads:
 
 `import pygame, time, RPi.GPIO as GPIO`
@@ -197,9 +198,9 @@ tone_obj.play(-1)
 time.sleep(2)
 tone_obj.stop()
 ```
-Either copy and paste or enter code below. Note the `GPIO.setup` command, this line is doing two things. It is setting pin 7 as an input *and* setting the internal pull up resistor on it. If you want to use the pull down resitor you'll need to use `GPIO.PUD_DOWN` instead.
+Either copy and paste or enter code below. Pay attention to the `GPIO.setup` command, this line is doing two things. It is setting pin 7 as an input *and* setting the internal pull up resistor on it. If you want to use the pull down resitor you'll need to use `GPIO.PUD_DOWN` instead.
 
-There is then a while loop which continually reads the state of pin 7 and prints HIGH or LOW to the screen every 1 second.
+There is then a while loop which continually reads the state of pin 7 and prints HIGH or LOW to the screen every second.
 ```python
 pin = 7
 GPIO.setmode(GPIO.BOARD)
@@ -212,6 +213,7 @@ while True:
 ```
 Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
 GPIO functions require root access on your Pi so from now on you must use the `sudo` command to run your code.
+If you don't use `sudo` you'll see the following error `No access to dev/mem. Try running as root!`
 
 `sudo ./morse-code.py`
 
@@ -230,3 +232,8 @@ HIGH
 Press `Ctrl - C` to quit.
 
 ##Step 4: Play a tone when they key is down
+
+So we've now proven that the value of the GPIO pin is changing when we press the Morse key but our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
+
+To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
+
