@@ -181,7 +181,7 @@ Neither way is any more correct than the other and which one people use is often
 
 Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi. Use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
 
-## Step 3: Write code to detect the key press
+## Step 3: Detect the key position through the GPIO pin value
 
 Enter the following command to edit our previous tone program:
 
@@ -233,7 +233,7 @@ Press `Ctrl - C` to quit.
 
 ##Step 4: Play a tone when they key is down
 
-So we've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
+We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
 To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
 
@@ -287,4 +287,6 @@ You can now test your code. Remember to use `sudo`.
 
 `sudo ./morse-code.py`
 
-After the you see the `Ready` message come up you should be able to start doing your first Morse Code messages. Give your Morse key a good button bashing to make sure that the tone is only ever on when the key is down and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions.
+After the you see the `Ready` message you should be able to start doing your first Morse Code messages. Give the key a good test to make sure that the tone is only ever on when the key is down and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
+
+Now have a go at a short word. The early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do, the Morse Code for SMS is `...--...`.
