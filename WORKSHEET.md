@@ -279,7 +279,7 @@ Enter the following command to edit our previous tone program:
 
 `nano morse-code.py`
 
-Leave the `ToneSound` class at the top of your program, scroll to the bottom and add the code above.
+Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above.
 If necessary modify it for a pull down configuration.
 
 Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
