@@ -213,7 +213,7 @@ while True:
 ```
 Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
 GPIO functions require root access on your Pi so from now on you must use the `sudo` command to run your code.
-If you don't use `sudo` you'll see the following error `No access to dev/mem. Try running as root!`
+If you don't use `sudo` you'll see the following error: `No access to dev/mem. Try running as root!`
 
 `sudo ./morse-code.py`
 
@@ -237,16 +237,16 @@ We've now proven that the value of the GPIO pin is changing when we press the Mo
 
 To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
 
-*Pro Tip*: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge and your tone will play at the wrong times.
+**Pro Tip**: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge and your tone will play at the wrong times.
 
-The most reliable way to do this using the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. We can do it by defining two functions called `wait_for_keyup` and `wait_for_keydown`. The overall goal here would be the following algorithm:
+The most reliable way to do this with the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
 - Loop
   - Wait for key down
   - Start playing tone
   - Wait for key up
   - Stop playing tone
 
-These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*. So while the key is up the pin will be HIGH. When the key is pressed the pin goes LOW and we can stop sleeping and start playing the tone. Wheas for a pull down it would be *while pin 7 is LOW keep sleeping*. In order to have a good response time we only need to sleep for a very short amount of time on each iteration of the loop. One hundredth of a second is ideal (0.01 seconds).
+We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*. So while the key is up the pin will be HIGH. When the key is pressed the pin goes LOW and we can stop sleeping and start playing the tone. Whereas for a pull down it would be *while pin 7 is LOW keep sleeping*. In order to have a good response time we only need to sleep for a very short amount of time for each iteration of the loop. One hundredth of a second is ideal (0.01 seconds).
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
