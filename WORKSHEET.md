@@ -233,7 +233,40 @@ Press `Ctrl - C` to quit.
 
 ##Step 4: Play a tone when they key is down
 
-So we've now proven that the value of the GPIO pin is changing when we press the Morse key but our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
+So we've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
 To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
 
+*Pro Tip*: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge and your tone will play at the wrong times.
+
+The most reliable way to do this using the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. We can do it by defining two functions called `wait_for_keyup` and `wait_for_keydown`. The overall goal here would be the following algorithm:
+- Loop
+  - Wait for key down
+  - Start playing tone
+  - Wait for key up
+  - Stop playing tone
+
+These functions use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up/down configuration you're using here. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*. So when the pin goes from HIGH to LOW we can finish waiting for the key to be *down* and stop sleeping. Wheas for a pull down it would be *while pin 7 is LOW keep sleeping*.
+
+The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
+
+
+
+```python
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def wait_for_keydown(pin):
+    while GPIO.input(pin):
+        time.sleep(.01)
+	
+def wait_for_keyup(pin):
+    while not GPIO.input(pin):
+        time.sleep(.01)
+
+while True:
+    reading = GPIO.input(pin)
+    print "HIGH" if reading else "LOW"
+    time.sleep(1)
+```
