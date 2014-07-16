@@ -250,7 +250,7 @@ These functions will use a `while` loop that will make the Pi sleep until the pi
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
-Have a look at the code below.
+Have a look at the code below. This is for a pull up configuration, if you're using pull down your `GPIO.setup` line will have `GPIO.PUD_DOWN` and you would just need to move the `not` keyword from `wait_for_keyup` into the same place in `wait_for_keydown`.
 
 ```python
 tone_obj = ToneSound(frequency = 800, volume = .5)
@@ -267,9 +267,24 @@ def wait_for_keyup(pin):
     while not GPIO.input(pin):
         time.sleep(.01)
 
+print "Ready"
+
 while True:
     wait_for_keydown(pin)
     tone_obj.play(-1) #the -1 means to loop the sound
     wait_for_keyup(pin)
     tone_obj.stop()
 ```
+Enter the following command to edit our previous tone program:
+
+`nano morse-code.py`
+
+Leave the `ToneSound` class at the top of your program, scroll to the bottom and add the code above.
+If necessary modify it for your pull up or down configuration.
+
+Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
+You can now test your code. Remember to use `sudo`.
+
+`sudo ./morse-code.py`
+
+After the you see the `Ready` message come up you should be able to start doing your first Morse Code messages. Give your Morse key a good button bashing to make sure that the tone is only ever on when the key is down and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions.
