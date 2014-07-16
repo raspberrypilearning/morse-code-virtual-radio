@@ -261,11 +261,11 @@ GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def wait_for_keydown(pin):
     while GPIO.input(pin):
-        time.sleep(.01)
+        time.sleep(0.01)
 	
 def wait_for_keyup(pin):
     while not GPIO.input(pin):
-        time.sleep(.01)
+        time.sleep(0.01)
 
 print "Ready"
 
@@ -283,7 +283,7 @@ Leave the `ToneSound` class at the top of your program, scroll to the bottom and
 If necessary modify it for a pull down configuration.
 
 Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
-You can now test your code. Remember to use `sudo`.
+You can now test your code. Remember to use the `sudo` command.
 
 `sudo ./morse-code.py`
 
@@ -292,3 +292,5 @@ After the you see the `Ready` message you should be able to start doing your fir
 Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do, the Morse Code for SMS is `...--...` and feel free to Google *nokia sms tone* to double check.
 
 ##Step 5: Decode the Morse as you go
+
+What will really help you learn is having a way to know when you're getting the code right or wrong. We can program the Pi to decode what you're keying in and then print the letters to the screen as you go. With this you can pick a message, try to key it in and immediately see if the correct text is being displayed. If the wrong text comes up then it's likely that you didn't key in the correct Morse Code sequence. Practise makes perfect!
