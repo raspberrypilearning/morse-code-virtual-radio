@@ -295,6 +295,8 @@ Now have a go at a short word. Early Nokia mobile phones used the Morse Code for
 
 What will really help you learn is having a way to know when you're getting the code right or wrong. We can program the Pi to decode what you're keying in and then print the letters to the screen as you go. With this you can pick a message, try to key it in and immediately see if the correct text is being displayed. If the wrong text comes up then it's likely that you didn't key in the correct Morse Code sequence. Practise makes perfect!
 
+Here is an example [video](https://www.youtube.com/watch?v=P7BT7aI1BPg).
+
 To program this we should remind ourselves about the rules of International Morse Code:
 
 - A dash is three times the length of a dot
