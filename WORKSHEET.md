@@ -275,7 +275,7 @@ while True:
     wait_for_keyup(pin)
     tone_obj.stop()
 ```
-Enter the following command to edit our previous tone program:
+Enter the following command to edit our previous program:
 
 `nano morse-code.py`
 
@@ -348,7 +348,7 @@ while True:
     else:
         print DOT
 ```
-Enter the following command to edit our previous tone program:
+Enter the following command to edit our previous program:
 
 `nano morse-code.py`
 
@@ -357,7 +357,7 @@ You can now test your code. Remember to use the `sudo` command.
 
 `sudo ./morse-code.py`
 
-Use the Morse key to make some long and short tones. You should see dots and dashes appearing at the moment when you release the key each time. The output will look something like this:
+Use the Morse key to make some long and short tones. You should see dots and dashes appearing at the moment when you release the key. The output will look something like this:
 ```
 .
 .
