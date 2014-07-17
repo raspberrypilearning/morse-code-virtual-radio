@@ -69,6 +69,8 @@ new_word = False
 
 thread.start_new_thread(decoder_thread, ())
 
+print "Ready"
+
 while True:
     wait_for_keydown(pin)
     key_down_time = time.time() #record the time when the key went down
