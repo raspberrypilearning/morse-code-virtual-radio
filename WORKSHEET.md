@@ -253,12 +253,6 @@ The `wait_for_keyup` function will then be the same but will have the opposite l
 Have a look at the code below. This is for a pull up configuration, if you're using pull down your `GPIO.setup` line will have `GPIO.PUD_DOWN` and you would just need to move the `not` keyword from `wait_for_keyup` into the same place in `wait_for_keydown`.
 
 ```python
-tone_obj = ToneSound(frequency = 800, volume = .5)
-
-pin = 7
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 def wait_for_keydown(pin):
     while GPIO.input(pin):
         time.sleep(0.01)
@@ -266,6 +260,12 @@ def wait_for_keydown(pin):
 def wait_for_keyup(pin):
     while not GPIO.input(pin):
         time.sleep(0.01)
+
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 print "Ready"
 
@@ -315,12 +315,6 @@ The aim is to time how long the key is held down for. Generally speaking a dot i
 Take a look at the code below, notice the the use of the `key_down_time` and `key_down_length` variables.
 
 ```python
-tone_obj = ToneSound(frequency = 800, volume = .5)
-
-pin = 7
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 def wait_for_keydown(pin):
     while GPIO.input(pin):
         time.sleep(0.01)
@@ -329,13 +323,19 @@ def wait_for_keyup(pin):
     while not GPIO.input(pin):
         time.sleep(0.01)
 
-print "Ready"
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 DOT = "."
 DASH = "-"
 
 key_down_time = 0
 key_down_length = 0
+
+print "Ready"
 
 while True:
     wait_for_keydown(pin)
