@@ -306,3 +306,43 @@ So to start with we need to tell the difference between a dot and a dash. We can
 
 Let's firstly program the Pi to recognise the difference between a dot and a dash.
 
+The aim is to time how long the key is held down for. Generally speaking a dot is about 0.15 seconds or less and anything longer than this is a dash. You're welcome to use a different value if you wish but I recommend 0.15. The way to time something in code is to record the time now, wait until something has happened and then subtract the time you recorded from the current time.
+
+Take a look at the code below, notice the the use of the `key_down_time` and `key_down_length` variables.
+
+```python
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def wait_for_keydown(pin):
+    while GPIO.input(pin):
+        time.sleep(0.01)
+	
+def wait_for_keyup(pin):
+    while not GPIO.input(pin):
+        time.sleep(0.01)
+
+print "Ready"
+
+DOT = "."
+DASH = "-"
+
+key_down_time = 0
+key_down_length = 0
+
+while True:
+    wait_for_keydown(pin)
+    key_down_time = time.time() #record the time when the key went down
+    tone_obj.play(-1) #the -1 means to loop the sound
+    wait_for_keyup(pin)
+    key_down_length = time.time() - key_down_time #get the length of time it was held down for
+    tone_obj.stop()
+    
+    if key_down_length > 0.15:
+        print DASH
+    else:
+        print DOT
+```
