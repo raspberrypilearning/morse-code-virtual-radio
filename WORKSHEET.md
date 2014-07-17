@@ -371,3 +371,17 @@ Use the Morse key to make some long and short tones. You should see dots and das
 .
 ```
 Press `Ctrl - C` to quit.
+
+Next we need a way to combine these dots and dashes to form letters and words. This is actually a little more tricky than it sounds. Consider how we're going to know when the user has finished a letter and when they have finished a word. The correct behaviour will be the following:
+
+- When they finish a letter: Display the letter
+- When they finish a word: Display a space character
+
+I am going to provide some code to make this easier.  This code will allow you to take a string of dots and dashes and look up the corresponding letter of the alphabet.  Enter the following command to download this file:
+
+`wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate`
+
+Now let's have a quick look at it, enter the command below to edit the file:
+
+`nano morse_lookup.py`
+
