@@ -24,13 +24,6 @@ class ToneSound(pygame.mixer.Sound):
                 samples[time] = -amplitude
         return samples
 
-
-tone_obj = ToneSound(frequency = 800, volume = .5)
-
-pin = 7
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
 def wait_for_keydown(pin):
     while GPIO.input(pin):
         time.sleep(0.01)
@@ -57,6 +50,12 @@ def decoder_thread():
                 bit_string = "".join(buffer)
                 try_decode(bit_string)
                 del buffer[:]
+
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 DOT = "."
 DASH = "-"
