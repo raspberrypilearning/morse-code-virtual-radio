@@ -302,4 +302,7 @@ To program this we should remind ourselves about the rules of International Mors
 - Letters in a word have a slightly longer gap of silence between them
 - Words have an even longer gap of silence between them
 
-So to start with we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measure the gap of silence between the tones. The same measurement of time will also give us the difference between letters in a word and separate words.
+So to start with we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measure the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
+
+Let's firstly program the Pi to recognise the difference between a dot and a dash.
+
