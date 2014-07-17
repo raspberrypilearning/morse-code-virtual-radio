@@ -346,3 +346,23 @@ while True:
     else:
         print DOT
 ```
+Enter the following command to edit our previous tone program:
+
+`nano morse-code.py`
+
+Scroll to the bottom and add the lines shown above that are missing from your code. When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
+You can now test your code. Remember to use the `sudo` command.
+
+`sudo ./morse-code.py`
+
+Use the Morse key to make some long and short tones. You should see dots and dashes appearing at the moment when you release the key each time. The output will look something like this:
+```
+.
+.
+.
+-
+-
+.
+.
+.
+```
