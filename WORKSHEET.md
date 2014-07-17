@@ -387,6 +387,9 @@ Now let's have a quick look at it, enter the command below to edit the file:
 
 The `morse_code_lookup` variable is a python *dictionary* object. A dictionary works using keys and values. For every key there is a corresponding value. You could create a dictionary to translate between say English and French. The key could be *Hello* and the value would be *Bonjour*. Here we're going to use it to translate between the sequence of dots and dashes and their corresponding letter.
 
-For example `-.-.` is the letter `C`. The `try_decode` function at the bottom can be used to test to see if a dot dash sequence is valid and translate it into its corresponding letter.
+For example `-.-.` is the letter `C`. The `try_decode` function at the bottom can be used to check that a dot-dash sequence is valid and, if so, translate it into the corresponding letter.
 
-Press `Ctrl - X` to quit from editing without saving.
+Press `Ctrl - X` to quit from editing without saving. Now lets go back to editing our main program, enter the following command:
+
+`nano morse-code.py`
+
