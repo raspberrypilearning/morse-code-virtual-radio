@@ -291,6 +291,8 @@ After the you see the `Ready` message you should be able to start doing your fir
 
 Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do, the Morse Code for SMS is `... -- ...` and feel free to Google *nokia sms tone* to double check. Try other words using the chart at the top.
 
+Press `Ctrl - C` to quit.
+
 ##Step 5: Decode the Morse as you go
 
 What will really help you learn is having a way to know when you're getting the code right or wrong. We can program the Pi to decode what you're keying in and then print the letters to the screen as you go. With this you can pick a message, try to key it in and immediately see if the correct text is being displayed. If the wrong text comes up then it's likely that you didn't key in the correct Morse Code sequence. Practise makes perfect!
@@ -368,3 +370,4 @@ Use the Morse key to make some long and short tones. You should see dots and das
 .
 .
 ```
+Press `Ctrl - C` to quit.
