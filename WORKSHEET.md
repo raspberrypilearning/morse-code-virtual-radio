@@ -354,7 +354,7 @@ Enter the following command to edit our previous program:
 
 `nano morse-code.py`
 
-Scroll to the bottom and add the lines shown above that are missing from your code. When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
+Scroll to the bottom and add the lines shown above that are missing from your code. If necessary modify it for a pull down configuration. When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
 You can now test your code. Remember to use the `sudo` command.
 
 `sudo ./morse-code.py`
@@ -405,6 +405,8 @@ Press `Ctrl - X` to quit from editing without saving.
 I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread of execution in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread of execution, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions we need to have another thread which can constantly do the work of decoding what the user is keying in.
+
+The overall goal here will be to modify the main *thread* so that it stores every dot and dash in a buffer list. The decoder *thread* will then be watching for different lengths of silence. If it's a short gap of silence then that’s a new letter so use the `try_decode` function to see if the buffer contents matches a letter (and empty the buffer ready for the next word). If the gap of silence gets longer then its a new word and we should show a space character.
 
 Now lets go back to editing our main program, enter the following command:
 
