@@ -377,7 +377,7 @@ Next we need a way to combine these dots and dashes to form letters and words. T
 - When they finish a letter: Display the letter
 - When they finish a word: Display a space character
 
-I am going to provide some code to make this easier.  This code will allow you to take a string of dots and dashes and look up the corresponding letter of the alphabet.  Enter the following command to download this file:
+I am going to provide some code to make this easier. This code will allow you to take a string of dots and dashes and look up the corresponding letter of the alphabet. Enter the following command to download this code:
 
 `wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate`
 
@@ -400,7 +400,13 @@ The result of the above code would be: `Bonjour`
 
 We're going to use this technique to translate between the sequence of dots and dashes and their corresponding letter. For example `-.-.` is the letter `C`. The `try_decode` function at the bottom can be used to check that a dot-dash sequence is valid and, if so, translate it into the corresponding letter.
 
-Press `Ctrl - X` to quit from editing without saving. Now lets go back to editing our main program, enter the following command:
+Press `Ctrl - X` to quit from editing without saving.
+
+I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread of execution in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread of execution, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
+
+Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions we need to have another thread which can constantly do the work of decoding what the user is keying in.
+
+Now lets go back to editing our main program, enter the following command:
 
 `nano morse-code.py`
 
