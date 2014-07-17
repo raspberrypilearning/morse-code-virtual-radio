@@ -77,5 +77,5 @@ while True:
     key_up_time = time.time() #record the time when the key was released
     key_down_length = key_up_time - key_down_time #get the length of time it was held down for
     tone_obj.stop()
-    new_letter = new_word = True
+    new_letter = new_word = True #reset the decoder
     buffer.append(DASH if key_down_length > 0.15 else DOT)
