@@ -487,7 +487,7 @@ Next is an `if` statement. There are two conditions upon which we need to act he
 
 The choice of `1.5` and `4.5` seconds is essentially arbitrary but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves you may wish to reduce these numbers in your code. This will allow you to key in the code faster but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 respectively and I am sure there are ex-telegraph operators out there that could have these values much lower!
 
-Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code. We need to put a line of code in that will *launch* the new thread. This has to be done from the *main thread* so scroll down and find the `print "Ready"` line. Add the line below just before it:
+Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code. We need to add a line of code in that will *launch* the new thread. This has to be done from the *main thread* so scroll down and find the `print "Ready"` line. Add the line below just before it:
 
 `thread.start_new_thread(decoder_thread, ())`
 
@@ -599,10 +599,13 @@ Now that you have a way to verify the correctness of your keying you can play a 
 
 The other person should:
 - Have a print out of the Morse code tree
+- Some paper, a pencil and a rubber
 - Be able to hear your Morse tones
 - Not be able to see your screen
 
 The aim of the game is to key in a message and see if the other person can decode it using just their ears. This is how it was done during both world wars. It's trickier than it sounds so go slowly and start off with just letters, then progress onto words and messages.
+
+*TIP:* If you can try not to write dots and dashes, instead try to get into the zone of listening to the tones, following the tree and arriving at a letter. Write down letters!
 
 The other person should write down on some paper the letters they think are being keyed in, when the message is finished you can compare what they wrote down to what is shown on the screen.
 
