@@ -483,7 +483,7 @@ def decoder_thread():
             bit_string = "".join(buffer)
             try_decode(bit_string)
             del buffer[:]
-        elif new_word and key_up_length >= 4:
+        elif new_word and key_up_length >= 4.5:
             new_word = False
             sys.stdout.write(" ")
             sys.stdout.flush()
@@ -492,4 +492,6 @@ Let's go through this. The first thing you'll notice is the use of the `global` 
 
 We then have another `while True` loop. The main purpose is to continually monitor the gaps of silence between tones. You'll see there is a sleep command to avoid overloading the CPU and then we calculate the `key_up_length` which is the `key_up_time` (from the main thread) subtracted from the current time.
 
-Next is an `if` statement. There are two conditions upon which we need to act here. One is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard coding the value of 1.5 seconds for this. If this happens we know we're in a new word so we set the `new_word` variable to True. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list and turning them into a single string that might be something like `.-..`. We can then see if that matches the key in of our Morse translation dictionary using the `try_decode` function. We then empty the buffer ready for the next word with `del buffer[:]`. If we didn't do this the buffer would just get bigger and bigger and would never match any letters.
+Next is an `if` statement. There are two conditions upon which we need to act here. First is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard coding the value of 1.5 seconds for this. If this happens we know we're in a new word so we set the `new_word` variable to `True`. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list and turning them into a single string that might be something like `.-..`. We can then see if that matches the key in of our Morse translation dictionary using the `try_decode` function. The `try_decode` function has code in it to display the result. We then empty the buffer ready for the next word with `del buffer[:]`. If we didn't do this the buffer would just get bigger and bigger and would never match any letters in the `morse_lookup.py` dictionary.
+
+The second conditions is when the gap of silence has increased to 4.5 seconds. Remember a rule of Morse is that the gap of silence to mean a new word has to be three times the length of the gap that means a new letter: `1.5 x 3 = 4.5`
