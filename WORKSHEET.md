@@ -610,3 +610,13 @@ The aim of the game is to key in a message and see if the other person can decod
 *TIP:* If the message sounds like gibberish when you're decoding just keep going, the person behind the screen could be making mistakes. The aim is for you to have exactly what is shown on their screen, even if it's wrong!
 
 Good luck!
+
+## Licence
+
+Unless otherwise specified, everything in this repository is covered by the following licence:
+
+![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
+
+***Morse Code Virtual Radio*** by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
+
+Based on a work at https://github.com/raspberrypilearning/morse-code
