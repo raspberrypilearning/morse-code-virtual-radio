@@ -66,6 +66,16 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 - 2 to 3 hours
 
+## Steps
+
+1. Setting Up your Pi
+1. Play a test beep
+1. Connect the Morse Code key to the GPIO pins
+1. Detect the key position through the GPIO pin value
+1. Play a tone when they key is down
+1. Decode the Morse as you go
+1. Play a listening game with a friend
+
 ## Worksheet & included files
 
 - [The worksheet](WORKSHEET.md)
@@ -74,6 +84,8 @@ A real Morse Code key will bring this project to life. Especially if you can acq
     ```bash
     wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate
     wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate
+    chmod +x final_code.py
+    sudo ./final_code.py
     ```
 
 ## Licence
