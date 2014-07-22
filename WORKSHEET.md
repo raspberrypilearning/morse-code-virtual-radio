@@ -494,8 +494,98 @@ We then have another `while True` loop. The main purpose is to continually monit
 
 Next is an `if` statement. There are two conditions upon which we need to act here.
 
-1. First is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard coding the value of 1.5 seconds for this. If this happens we know we're in a new word so we set the `new_word` variable to `True`. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list and turning them into a single string that might be something like `.-..`. We can then see if that matches the key in of our Morse translation dictionary using the `try_decode` function. The `try_decode` function has code in it to display the result. We then empty the buffer ready for the next word with `del buffer[:]`. If we didn't do this the buffer would just get bigger and bigger and would never match any letters in the `morse_lookup.py` dictionary.
+1. First is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard coding the value of `1.5` seconds for this. If this happens we know we're in a new word so we set the `new_word` variable to `True`. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list and turning them into a single string that might be something like `.-..`. We can then see if that matches the key in of our Morse translation dictionary using the `try_decode` function. The `try_decode` function has code in it to display the result. We then empty the buffer ready for the next word with `del buffer[:]`. If we didn't do this the buffer would just get bigger and bigger and would never match any letters in the `morse_lookup.py` dictionary.
 
-1. The second conditions is when the gap of silence has increased to 4.5 seconds. Remember a rule of Morse is that the gap of silence for a new word has to be three times the length that means a new letter: `1.5 x 3 = 4.5`. So here we just set `new_word` to False (so that the else if condition no longer succeeds) and then put down a space character.
+1. The second conditions is when the gap of silence has increased to `4.5` seconds. Remember a rule of Morse is that the gap of silence for a new word has to be three times the length that means a new letter: `1.5 x 3 = 4.5`. So here we just set `new_word` to False (so that the else if condition no longer succeeds) and then put down a space character.
 
 *Note:* The use of `sys.stdout` is so that we can print to the screen without having to always show a new line as with the default `print` command.
+
+The choice of `1.5` and `4.5` seconds is essentially arbitrary but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves you may wish to reduce these numbers in your code. This will allow you to key in the code faster but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 respectively and I am sure there are ex-telegraph operators out there that could have these values much lower than I!
+
+So press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code. We need to put a line of code in that will *launch* the new thread. This has to be done from the *main thread* so scroll down and find the `print "Ready"` line. Add the line below just before it:
+
+`thread.start_new_thread(decoder_thread, ())`
+
+The final code should look like this:
+
+```python
+#!/usr/bin/python
+import pygame, time, RPi.GPIO as GPIO, thread
+from array import array
+from pygame.locals import *
+from morse_lookup import *
+
+pygame.mixer.pre_init(44100, -16, 1, 1024)
+pygame.init()
+
+class ToneSound(pygame.mixer.Sound):
+    def __init__(self, frequency, volume):
+        self.frequency = frequency
+        pygame.mixer.Sound.__init__(self, self.build_samples())
+        self.set_volume(volume)
+
+    def build_samples(self):
+        period = int(round(pygame.mixer.get_init()[0] / self.frequency))
+        samples = array("h", [0] * period)
+        amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
+        for time in xrange(period):
+            if time < period / 2:
+                samples[time] = amplitude
+            else:
+                samples[time] = -amplitude
+        return samples
+
+def wait_for_keydown(pin):
+    while GPIO.input(pin):
+        time.sleep(0.01)
+
+def wait_for_keyup(pin):
+    while not GPIO.input(pin):
+        time.sleep(0.01)
+
+def decoder_thread():
+    global key_up_time
+    global buffer
+    new_word = False
+    while True:
+        time.sleep(.01)
+        key_up_length = time.time() - key_up_time
+        if len(buffer) > 0 and key_up_length >= 1.5:
+            new_word = True
+            bit_string = "".join(buffer)
+            try_decode(bit_string)
+            del buffer[:]
+        elif new_word and key_up_length >= 4.5:
+            new_word = False
+            sys.stdout.write(" ")
+            sys.stdout.flush()
+
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+DOT = "."
+DASH = "-"
+
+key_down_time = 0
+key_down_length = 0
+key_up_time = 0
+buffer = []
+
+thread.start_new_thread(decoder_thread, ())
+
+print "Ready"
+
+while True:
+    wait_for_keydown(pin)
+    key_down_time = time.time() #record the time when the key went down
+    tone_obj.play(-1) #the -1 means to loop the sound
+    wait_for_keyup(pin)
+    key_up_time = time.time() #record the time when the key was released
+    key_down_length = key_up_time - key_down_time #get the length of time it was held down for
+    tone_obj.stop()
+    buffer.append(DASH if key_down_length > 0.15 else DOT)
+```
+When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
