@@ -603,10 +603,10 @@ The other person should:
 - Be able to hear your Morse tones
 - Not be able to see your screen
 
-The aim of the game is to key in a message and see if the other person can decode it using just their ears. This is how it was done during both world wars. It's trickier than it sounds so go slowly and start off with just letters, then progress onto words and messages.
+The aim of the game is to key in a message and see if the other person can decode it using just their ears. This is how it was done during both world wars. It's trickier than it sounds so go slowly and start off with just letters, then progress onto words and messages. The other person should write down on some paper what they think is being keyed in, when the message is finished you can compare what they wrote down to what was shown on the screen.
 
-*TIP:* If you can try not to write dots and dashes, instead try to get into the zone of listening to the tones, following the tree and arriving at a letter. Write down letters!
+*TIP:* Try not to write dots and dashes, instead try to get into the zone of listening to the tones, following the tree and arriving at a letter. Write down letters!
 
-The other person should write down on some paper the letters they think are being keyed in, when the message is finished you can compare what they wrote down to what is shown on the screen.
+*TIP:* If the message sounds like gibberish when you're decoding just keep going, the person behind the screen could be making mistakes. The aim is for you to have exactly what is shown on their screen, even if it's wrong!
 
 Good luck!
