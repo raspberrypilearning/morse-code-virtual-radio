@@ -427,23 +427,6 @@ buffer = []
 ```
 Add these variables to your code as shown below. There are also two new lines to add inside the main while loop. A line which sets `key_up_time` and another that appends to the `buffer` list. Make sure you add both of them.
 ```python
-def wait_for_keydown(pin):
-    while GPIO.input(pin):
-        time.sleep(0.01)
-	
-def wait_for_keyup(pin):
-    while not GPIO.input(pin):
-        time.sleep(0.01)
-
-tone_obj = ToneSound(frequency = 800, volume = .5)
-
-pin = 7
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-DOT = "."
-DASH = "-"
-
 key_down_time = 0
 key_down_length = 0
 key_up_time = 0
@@ -508,7 +491,7 @@ Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do bef
 
 `thread.start_new_thread(decoder_thread, ())`
 
-The **final code** should look like this, do one last check:
+The **final code** should look like this, remember to make the necessary changes if you're using a pull down instead of up. Do one last check:
 ```python
 #!/usr/bin/python
 import pygame, time, RPi.GPIO as GPIO, thread
@@ -605,6 +588,8 @@ The output should look like this:
 `SOS HELLO `
 
 Press `Ctrl - C` to quit.
+
+You can ignore the message saying `Unhandled exception in thread` etc, this is just the child thread being terminated when you send the `KeyboardInterrupt` with `Ctrl - C`.
 
 ##Step 6: Play a listening game with a friend
 
