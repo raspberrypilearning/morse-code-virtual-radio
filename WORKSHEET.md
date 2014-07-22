@@ -500,14 +500,13 @@ Next is an `if` statement. There are two conditions upon which we need to act he
 
 *Note:* The use of `sys.stdout` is so that we can print to the screen without having to always show a new line as with the default `print` command.
 
-The choice of `1.5` and `4.5` seconds is essentially arbitrary but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves you may wish to reduce these numbers in your code. This will allow you to key in the code faster but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 respectively and I am sure there are ex-telegraph operators out there that could have these values much lower than I!
+The choice of `1.5` and `4.5` seconds is essentially arbitrary but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves you may wish to reduce these numbers in your code. This will allow you to key in the code faster but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 respectively and I am sure there are ex-telegraph operators out there that could have these values much lower!
 
-So press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code. We need to put a line of code in that will *launch* the new thread. This has to be done from the *main thread* so scroll down and find the `print "Ready"` line. Add the line below just before it:
+Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code. We need to put a line of code in that will *launch* the new thread. This has to be done from the *main thread* so scroll down and find the `print "Ready"` line. Add the line below just before it:
 
 `thread.start_new_thread(decoder_thread, ())`
 
-The final code should look like this:
-
+The final code should look like this, do one last check:
 ```python
 #!/usr/bin/python
 import pygame, time, RPi.GPIO as GPIO, thread
@@ -589,3 +588,13 @@ while True:
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
 When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit from editing.
+You can now test your code. Remember to use the `sudo` command.
+
+`sudo ./morse-code.py`
+
+Wait for the `Ready` message to show and then begin. You may wish to refer to the charts at the top of this page.
+Try to do SOS `... --- ...`
+
+The output should look like this:
+
+`SOS HELLO `
