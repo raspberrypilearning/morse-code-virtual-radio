@@ -4,7 +4,9 @@ How to program your Raspberry Pi to send, recieve and decode Morse.
 
 ![](./images/cover.png)
 
-This year marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I), also known as *The Great War*.  The war began on the 28th of July 1914.  To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then.
+This year marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I). Over 16 million people lost their lives and 20 million suffered injuries making it one of the bloodiest conflicts in human history. It became known as the Great War and subsequently the First World War. War was declared on the 28th of July 1914. To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive then and sending and receiving messages that could mean life and death using only tones!
+
+*Note: This resources uses International Morse.*
 
 ## Lesson objectives
 
@@ -13,13 +15,15 @@ This year marks the 100th anniversary of the declaration of [World War 1](http:/
 - Understand how to send and receive Morse
 - Understand a pull up circuit
 - Understand a pull down circuit
+- Understand multithreading
 
 ## Lesson outcomes
 
 - To have programmed the Raspberry Pi to create Morse Code tones
-- To have sent and recieved messages in Morse Code
+- To have sent and decoded messages in Morse Code
 - Gained experience in Python programming
 - Gained experience using the Raspberry Pi GPIO pins
+- Gained experience in multithreaded programming
 
 ## Requirements
 
@@ -65,8 +69,8 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 ## Worksheet & included files
 
 - [The worksheet](WORKSHEET.md)
-
-*Note: This resources uses International Morse.*
+- (Optional) Final version of Python code [final_code.py](./final_code.py)
+    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate`
 
 ## Licence
 
