@@ -408,13 +408,59 @@ Press `Ctrl - X` to quit from editing without saving.
 
 ###Multithreading
 
-I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread of execution in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread of execution, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
+I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A *thread* in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions we need to have another thread which can constantly do the work of decoding what the user is keying in.
 
-The overall goal here will be to modify the main *thread* so that it stores every dot and dash in a buffer list. The decoder *thread* will then be watching for different lengths of silence. If it's a short gap of silence then that’s a new letter so use the `try_decode` function to see if the buffer contents matches a letter (and empty the buffer ready for the next word). If the gap of silence gets longer then its a new word and we should show a space character.
+The overall goal here will be to modify the main *thread* so that it stores every dot and dash in a buffer list. The decoder *thread* will then be watching independently for different lengths of silence. If it's a short gap of silence then that’s a new letter so use the `try_decode` function to see if the buffer contents matches a letter (and empty the buffer ready for the next word). If the gap of silence gets longer then its a new word and we should show a space character.
 
 Now lets go back to editing our main program, enter the following command:
 
 `nano morse-code.py`
+
+Firstly we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silence gaps can be measured in our code. The other is called `buffer` and is a list which we will temporarily hold the dots and dashes in before a full word is complete.
+
+```python
+key_up_time = 0
+buffer = []
+```
+
+Add these variables to your code as shown below. There are also two new lines to add inside the main while loop. A line which sets `key_up_time` and another that appends to the `buffer` list. Make sure you add both of them.
+
+```python
+def wait_for_keydown(pin):
+    while GPIO.input(pin):
+        time.sleep(0.01)
+	
+def wait_for_keyup(pin):
+    while not GPIO.input(pin):
+        time.sleep(0.01)
+
+tone_obj = ToneSound(frequency = 800, volume = .5)
+
+pin = 7
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+DOT = "."
+DASH = "-"
+
+key_down_time = 0
+key_down_length = 0
+key_up_time = 0
+buffer = []
+
+print "Ready"
+
+while True:
+    wait_for_keydown(pin)
+    key_down_time = time.time() #record the time when the key went down
+    tone_obj.play(-1) #the -1 means to loop the sound
+    wait_for_keyup(pin)
+    key_up_time = time.time() #record the time when the key was released
+    key_down_length = time.time() - key_down_time #get the length of time it was held down for
+    tone_obj.stop()
+    buffer.append(DASH if key_down_length > 0.15 else DOT)
+```
+Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet.
 
