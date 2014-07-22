@@ -70,7 +70,11 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 - [The worksheet](WORKSHEET.md)
 - (Optional) Final version of Python code [final_code.py](./final_code.py)
-    - Download to your Pi with `wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate`
+    - Download to your Pi with
+    ```bash
+    wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate
+    wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate
+    ```
 
 ## Licence
 
