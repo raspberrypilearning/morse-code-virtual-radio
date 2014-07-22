@@ -594,9 +594,9 @@ You can now test your code. Remember to use the `sudo` command.
 
 Wait for the `Ready` message to show and then begin. *TIP:* The trick is to watch the screen and wait for a letter to appear before you start keying in the next one. You may wish to refer to the charts at the top of this page.
 
-SOS is `...  ---  ...`
+SOS is `...` `---` `...`
 
-Hello is `....  .  .-..  .-..  ---`
+Hello is `....` `.` `.-..` `.-..` `---`
 
 The output should look like this:
 
