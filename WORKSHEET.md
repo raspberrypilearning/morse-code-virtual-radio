@@ -233,7 +233,7 @@ Press `Ctrl - C` to quit.
 
 ##Step 4: Play a tone when they key is down
 
-We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
+We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code is still very basic. All we have is a loop that keeps polling the pin, the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
 To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
 
@@ -306,9 +306,9 @@ To program this we should remind ourselves about the rules of International Mors
 - Letters in a word have a slightly longer gap of silence between them
 - Words have an even longer gap of silence between them
 
-###Distinguish dot and dash
-
 So to start with we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measure the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
+
+###Distinguish dot and dash
 
 Let's firstly program the Pi to recognise the difference between a dot and a dash.
 
