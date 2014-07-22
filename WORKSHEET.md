@@ -593,7 +593,10 @@ You can now test your code. Remember to use the `sudo` command.
 `sudo ./morse-code.py`
 
 Wait for the `Ready` message to show and then begin. You may wish to refer to the charts at the top of this page.
-Try to do SOS `... --- ...`
+
+SOS is `... --- ...`
+
+Hello is `.... . .-.. .-.. ---`
 
 The output should look like this:
 
