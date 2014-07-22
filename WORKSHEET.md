@@ -306,6 +306,8 @@ To program this we should remind ourselves about the rules of International Mors
 - Letters in a word have a slightly longer gap of silence between them
 - Words have an even longer gap of silence between them
 
+###Distinguish dot and dash
+
 So to start with we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measure the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
 
 Let's firstly program the Pi to recognise the difference between a dot and a dash.
@@ -372,6 +374,8 @@ Use the Morse key to make some long and short tones. You should see dots and das
 ```
 Press `Ctrl - C` to quit.
 
+###Translate into text
+
 Next we need a way to combine these dots and dashes to form letters and words. This is actually a little more tricky than it sounds. Consider how we're going to know when the user has finished a letter and when they have finished a word. The correct behaviour will be the following:
 
 - When they finish a letter: Display the letter
@@ -401,6 +405,8 @@ The result of the above code would be: `Bonjour`
 We're going to use this technique to translate between the sequence of dots and dashes and their corresponding letter. For example `-.-.` is the letter `C`. The `try_decode` function at the bottom can be used to check that a dot-dash sequence is valid and, if so, translate it into the corresponding letter.
 
 Press `Ctrl - X` to quit from editing without saving.
+
+###Multithreading
 
 I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread of execution in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread of execution, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
 
