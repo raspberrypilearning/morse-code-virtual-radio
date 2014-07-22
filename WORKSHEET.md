@@ -418,15 +418,12 @@ Now lets go back to editing our main program, enter the following command:
 
 `nano morse-code.py`
 
-Firstly we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silence gaps can be measured in our code. The other is called `buffer` and is a list which will temporarily hold the dots and dashes before a full word is complete.
-
+Firstly we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silence gaps can be measured in our code. The other is called `buffer` and this is a list which will temporarily hold the dots and dashes before a full word is complete.
 ```python
 key_up_time = 0
 buffer = []
 ```
-
 Add these variables to your code as shown below. There are also two new lines to add inside the main while loop. A line which sets `key_up_time` and another that appends to the `buffer` list. Make sure you add both of them.
-
 ```python
 def wait_for_keydown(pin):
     while GPIO.input(pin):
@@ -464,7 +461,7 @@ while True:
 ```
 Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet though, do not run the code as it is. We still need to add new the *thread*.
 
-We now need to add some new imports to the top of our file. Scroll up to the top and find the import line. We need to add `thread` to the import line and `from morse_lookup import *` to give us access the lookup code we downloaded earlier.
+First we need to add some new imports to the top of our file. Scroll up to the top and find the import line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access the lookup code we downloaded earlier. The code should now look like this:
 ```python
 #!/usr/bin/python
 import pygame, time, RPi.GPIO as GPIO, thread
@@ -472,3 +469,25 @@ from array import array
 from pygame.locals import *
 from morse_lookup import *
 ```
+Next let's put the code in that will run on our separate *thread*. To do this you can just define a function and this is what is run *on* that thread. Add this function to your code just below the `wait_for_keyup` function:
+```python
+def decoder_thread():
+    global key_up_time
+    global buffer
+    new_word = False
+    while True:
+        time.sleep(.01)
+        key_up_length = time.time() - key_up_time
+        if len(buffer) > 0 and key_up_length >= 1.5:
+            new_word = True
+            bit_string = "".join(buffer)
+            try_decode(bit_string)
+            del buffer[:]
+        elif new_word and key_up_length >= 4:
+            new_word = False
+            sys.stdout.write(" ")
+            sys.stdout.flush()
+```
+Let's go through this. The first thing you'll notice is the use of the `global` keyword. This will give the thread access to the `key_up_time` and `buffer` variables, that belong to the main thread, so that they can be used here. Next we have a viable called `new_word`. Once the end of the word has been detected we set this to `False` so that we don't keep putting more spaces down.
+
+We then have another `while True` loop. The main purpose is to continually monitor the gaps of silence between tones. You'll see there is a sleep command to avoid overloading the CPU and then we calculate the `key_up_length` which is the `key_up_time` from the main thread subtracted from the current time.
