@@ -4,7 +4,7 @@ How to program your Raspberry Pi to send, recieve and decode Morse.
 
 ![](./images/cover.png)
 
-This year marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I). Over 16 million people lost their lives and 20 million suffered injuries making it one of the bloodiest conflicts in human history. It became known as the Great War and subsequently the First World War. War was declared on the 28th of July 1914. To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive then and sending and receiving messages that could mean life and death using only tones!
+2014 marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I). Over 16 million people lost their lives and 20 million suffered injuries making it one of the bloodiest conflicts in human history. It became known as the Great War and subsequently the First World War. War was declared on the 28th of July 1914. To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive then and sending and receiving messages that could mean life and death using only tones!
 
 *Note: This resources uses International Morse.*
 
