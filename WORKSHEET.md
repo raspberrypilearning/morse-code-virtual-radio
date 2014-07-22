@@ -161,7 +161,7 @@ We can do this in two ways:
 
 ### The Practise
 
-Fortunately the Raspberry Pi has all the above circuitry *built in* and we can select either a pull up or a pull down circuit **in our code** for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
+Fortunately the Raspberry Pi has all the above circuitry *built in* and we can select either a pull up or a pull down circuit *in our code* for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
 
 - Pull up configuration
 
@@ -237,7 +237,7 @@ We've now proven that the value of the GPIO pin is changing when we press the Mo
 
 To do Morse Code properly we need to respond every time the user presses or releases the key by starting and stopping the tone sound.
 
-**Pro Tip**: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge and your tone will play at the wrong times.
+**TIP**: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge and your tone will play at the wrong times.
 
 The most reliable way to do this with the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
 - Loop
@@ -406,13 +406,15 @@ We're going to use this technique to translate between the sequence of dots and 
 
 Press `Ctrl - X` to quit from editing without saving.
 
-###Multithreading
+###Multithreading concept
 
 I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A *thread* in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, the main one. But it is possible to have multiple threads going at the same time. Kind of like making a program pat its head and rub its belly at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions we need to have another thread which can constantly do the work of decoding what the user is keying in.
 
 The overall goal here will be to modify the main *thread* so that it stores every dot and dash in a buffer list. The decoder *thread* will then be watching independently for different lengths of silence. If it's a short gap of silence then that’s a new letter so use the `try_decode` function to see if the buffer contents matches a letter (and empty the buffer ready for the next word). If the gap of silence gets longer then its a new word and we should show a space character.
+
+###Add the code
 
 Now lets go back to editing our main program, enter the following command:
 
@@ -459,7 +461,7 @@ while True:
     tone_obj.stop()
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
-Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet though, do not run the code as it is. We still need to add new the *thread*.
+Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet though, do not run the code as it is. We still need to add code for the new the *thread*.
 
 First we need to add some new imports to the top of our file. Scroll up to the top and find the import line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access the lookup code we downloaded earlier. The code should now look like this:
 ```python
@@ -506,7 +508,7 @@ Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do bef
 
 `thread.start_new_thread(decoder_thread, ())`
 
-The final code should look like this, do one last check:
+The **final code** should look like this, do one last check:
 ```python
 #!/usr/bin/python
 import pygame, time, RPi.GPIO as GPIO, thread
@@ -602,3 +604,21 @@ The output should look like this:
 
 `SOS HELLO `
 
+Press `Ctrl - C` to quit.
+
+##Step 6: Play a listening game with a friend
+
+![](./images/decoding.png)
+
+Now that you have a way to verify the correctness of your keying you can play a listening game with a friend.
+
+The other person should:
+- Have a print out of the Morse code tree
+- Be able to hear your Morse tones
+- Not be able to see your screen
+
+The aim of the game is to key in a message and see if the other person can decode it using just their ears. This is how it was done during both world wars. It's trickier than it sounds so go slowly and start off with just letters, then progress onto words and messages.
+
+The other person should write down on some paper the letters they think are being keyed in, when the message is finished you can compare what they wrote down to what is shown on the screen.
+
+Good luck!
