@@ -418,7 +418,7 @@ Now lets go back to editing our main program, enter the following command:
 
 `nano morse-code.py`
 
-Firstly we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silence gaps can be measured in our code. The other is called `buffer` and is a list which we will temporarily hold the dots and dashes in before a full word is complete.
+Firstly we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silence gaps can be measured in our code. The other is called `buffer` and is a list which will temporarily hold the dots and dashes before a full word is complete.
 
 ```python
 key_up_time = 0
@@ -462,5 +462,13 @@ while True:
     tone_obj.stop()
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
-Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet.
+Double check that your code is the same as the above. When you're done press `Ctrl - O` then `Enter` to save. We're not finished editing yet though, do not run the code as it is. We still need to add new the *thread*.
 
+We now need to add some new imports to the top of our file. Scroll up to the top and find the import line. We need to add `thread` to the import line and `from morse_lookup import *` to give us access the lookup code we downloaded earlier.
+```python
+#!/usr/bin/python
+import pygame, time, RPi.GPIO as GPIO, thread
+from array import array
+from pygame.locals import *
+from morse_lookup import *
+```
