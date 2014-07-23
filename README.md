@@ -1,12 +1,12 @@
 # Morse Code Virtual Radio
 
-How to program your Raspberry Pi to send, recieve and decode Morse.
+How to program your Raspberry Pi to send, receive and decode Morse.
 
 ![](./images/cover.png)
 
-2014 marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I). Over 16 million people lost their lives and 20 million suffered injuries making it one of the bloodiest conflicts in human history. It became known as the Great War and subsequently the First World War. War was declared on the 28th of July 1914. To commemorate this event we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive then and sending and receiving messages that could mean life and death using only tones!
+2014 marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I), which was declared on the 28th of July 1914. Over 16 million people lost their lives and 20 million were injured, making it one of the bloodiest conflicts in human history. It became known as the Great War and, subsequently, the First World War. To commemorate this event, we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive one hundred years ago, and sending and receiving messages that could mean life and death using only tones!
 
-*Note: This resources uses International Morse.*
+*Note: This resource uses International Morse.*
 
 ## Lesson objectives
 
@@ -46,7 +46,7 @@ How to program your Raspberry Pi to send, recieve and decode Morse.
 
 ### Extras: A Morse Code key
 
-A real Morse Code key will bring this project to life. Especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online, see the links below.
+A real Morse Code key will bring this project to life, especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online; see the links below.
 
 - Buy new online (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
 
@@ -68,11 +68,11 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 ## Steps
 
-1. Setting Up your Pi
+1. Setting up your Pi
 1. Play a test beep
 1. Connect the Morse Code key to the GPIO pins
 1. Detect the key position through the GPIO pin value
-1. Play a tone when they key is down
+1. Play a tone when the key is down
 1. Decode the Morse as you go
 1. Play a listening game with a friend
 
@@ -80,7 +80,8 @@ A real Morse Code key will bring this project to life. Especially if you can acq
 
 - [The worksheet](WORKSHEET.md)
 - (Optional) Final version of Python code [final_code.py](./final_code.py)
-    - Download to your Pi with
+    - Download to your Pi with the following commands:
+
     ```bash
     wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate
     wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate
