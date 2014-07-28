@@ -2,7 +2,7 @@
 
 How to program your Raspberry Pi to send, receive and decode Morse.
 
-![](./images/cover.png)
+![](images/cover.png)
 
 2014 marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I), which began on the 28th of July 1914. Over 16 million people lost their lives and 20 million were injured, making it one of the bloodiest conflicts in human history. It became known as the Great War and, subsequently, the First World War. To commemorate this event, we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive one hundred years ago, and sending and receiving messages that could mean life and death using only tones!
 
@@ -50,17 +50,17 @@ A real Morse Code key will bring this project to life, especially if you can acq
 
 - Buy new online (try [nevada radio](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550))
 
-  ![](./images/MFJ-550.png)
+  ![](images/MFJ-550.png)
 
 - Find an antique (try [eBay](http://search.ebay.co.uk/antique+morse+code+key))
 
   Make sure it works!
 
-  ![](./images/antique_key.png)
+  ![](images/antique_key.png)
 
 - Make your own!
 
-  ![](./images/homebrew_key.png)
+  ![](images/homebrew_key.png)
 
 ### Time required
 
