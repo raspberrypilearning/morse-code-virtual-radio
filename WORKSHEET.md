@@ -1,12 +1,12 @@
 # Introduction: what is Morse Code?
 
-![](./images/qst_may_1942.png)
+![](images/qst_may_1942.png)
 
 Invented by [Samuel Morse](http://en.wikipedia.org/wiki/Samuel_F._B._Morse) in the year 1836, Morse Code is a method for sending and receiving text messages using short and long beeps. Conventionally, a short beep is called a *dot* and a long one is a *dash* (also known as a *dit* and a *dah*). Every letter of the alphabet has a unique sequence of dots and dashes.
 
 If you look at the chart below, the letter **A** is beep beeeeeep and the letter **B** is beeeeeep beep beep beep.
 
-![](./images/morse.png)
+![](images/morse.png)
 
 - A dash is three times the length of a dot
 - Each dot or dash has a short gap of silence after it
@@ -27,7 +27,7 @@ The choice of the dot and dash sequence for each letter is not random. Samuel Mo
 
 The chart below is the Morse code tree, and is really helpful when listening and decoding; you might want to print it out and always have it in front of you. You can see that **E** and **T** are the most common letters. So you start at the top, go to the *left* if you hear a dot and to the *right* if you hear a dash. You can double-check this against the first chart; try it now for the letters **A** and **B**.
 
-![listening](./images/morse_listening.png)
+![listening](images/morse_listening.png)
 
 Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find this hard; it's always tricky to start with. As with many things, the more you do it the easier it gets. In this resource we're going to program the Raspberry Pi to help you learn how to do this. You're going to build your own learning tool which will tell you if you're getting it right or not, so let's get set up.
 
@@ -133,7 +133,7 @@ If you didn't hear anything then double-check everything is plugged in correctly
 
 ## Step 2: Connect the Morse Code key to the GPIO pins
 
-![](./images/p1.png)
+![](images/p1.png)
 
 ### The theory
 
@@ -151,13 +151,13 @@ We can do this in two ways:
 
   Wire the GPIO pin to 3.3 volts through a large 10kΩ resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
 
-  ![](./images/pull_up.png)
+  ![](images/pull_up.png)
 
 - A pull down circuit
 
   Wire the GPIO pin to ground through a large 10kΩ resistor so that it always reads LOW. Then we can short the pin to 3.3 volts through the Morse key, so that it goes HIGH when you press it. When the key is pressed there is a lower resistance path to 3.3 volts, and therefore the pin will read HIGH. 
 
-  ![](./images/pull_down.png)
+  ![](images/pull_down.png)
   
   *Note: The 10kΩ resistor is there in both circuits to give the GPIO pin a fail-safe protection, in case we mistakenly set the pin to be in OUTPUT mode.*
 
@@ -169,17 +169,17 @@ Fortunately, the Raspberry Pi has all the above circuitry *built in* and we can 
 
   GPIO pin #7 will be wired to 3.3 volts using the internal pull up resistor, so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
 
-  ![](./images/pull_up_key.png) 
+  ![](images/pull_up_key.png) 
 
 - Pull down configuration
 
   GPIO pin #7 will be wired to ground using the internal pull down resistor, so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse key, so that the pin will go HIGH when you press it.
 
-  ![](./images/pull_down_key.png) 
+  ![](images/pull_down_key.png) 
 
 Both methods will work equally well; which one people use is often just personal preference. Take the two jumper wires and screw the male ends into the terminal blocks on your Morse Code key. On some very old antique keys this can be a tricky operation.
 
-![](./images/jumper_wires_key.png) 
+![](images/jumper_wires_key.png) 
 
 Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
 
@@ -614,7 +614,7 @@ You can ignore the message saying `Unhandled exception in thread`; this is just 
 
 ## Step 6: Play a listening game with a friend
 
-![](./images/decoding.png)
+![](images/decoding.png)
 
 Now that you have a way to verify the correctness of your keying, you can play a listening game with a friend.
 
