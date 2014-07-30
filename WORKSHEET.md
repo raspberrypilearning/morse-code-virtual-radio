@@ -637,7 +637,7 @@ Good luck!
 
 ## Further study of Morse Code
 
-One of the things you may wish to do is extend the decoding ability of this project to include punctuation characters like the full stop: `.-.-.-`, comma: `--..--` and question mark: `..--..`.  You may also wish to be able to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate.
+One of the things you may wish to do is extend the decoding ability of this project to include punctuation characters like the full stop `.-.-.-`, comma `--..--` and question mark `..--..`.  You may also wish to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate.
 
 A comprehensive reference for International Morse can be found [here](https://www.itu.int/rec/R-REC-M.1677-1-200910-I/en) which covers English, French, Arabic, Chinese and Russian.
 
