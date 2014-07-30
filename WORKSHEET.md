@@ -645,7 +645,7 @@ There are also special procedural characters that conventionally mean things lik
 
 If you're serious about learning Morse then I would suggest that you have a read of [this discussion](http://www.qsl.net/n1irz/finley.morse.html) regarding the **Koch Method** of Morse training. This is a tried and tested way to learn Morse by listening at 15 to 20 words per minute. There is also an existing [Python package](https://pypi.python.org/pypi/KochMorse/0.99.7) which provides a Gtk2 style interface that you could install and use.
 
-If you wish to use your `morse-code.py` project to *key in* at 15 to 20 words per minute you will need to modify some of the timing numbers that we hard coded. These are specifically in the `decoder_thread` function where we're testing `key_up_length >= 1.5` and `key_up_length >= 4.5` respectively. Those numbers would need to be reduced. I would recommend to reduce them in stages but ensure that the new word time (where we show a space) is always three times the length of the new letter time (where we decode the letter). Try 1 and 3 respectively and see how you fair on before going lower.
+If you wish to use your `morse-code.py` project to *key in* at 15 to 20 words per minute you will need to modify some of the timing numbers that we hard coded. These are specifically in the `decoder_thread` function where we're testing `key_up_length >= 1.5` and `key_up_length >= 4.5` respectively. Those numbers would need to be reduced. I would recommend to reduce them in stages but ensure that the new word time (where we show a space) is always three times the length of the new letter time (where we decode the letter). Try 1 and 3 respectively and see how you fair before going lower.
 
 ## Licence
 
