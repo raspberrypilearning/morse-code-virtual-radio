@@ -160,7 +160,7 @@ We can do this in two ways:
 
   ![](images/pull_down.png)
   
-  *Note: The 1kΩ resistor is there in both circuits to give the GPIO pin a fail-safe protection, in case we mistakenly set the pin to be in OUTPUT mode.*
+  *Note: The 1kΩ R2 resistor is there in both circuits to give the GPIO pin a fail-safe protection, in case we mistakenly set the pin to be in OUTPUT mode.*
 
 ### The practice
 
