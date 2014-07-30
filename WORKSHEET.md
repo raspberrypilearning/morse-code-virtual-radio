@@ -8,10 +8,11 @@ If you look at the chart below, the letter **A** is beep beeeeeep and the letter
 
 ![](images/morse.png)
 
+- All timings are defined as multiples of one dot length
 - A dash is three times the length of a dot
-- Each dot or dash has a short gap of silence after it
-- Letters in a word have a slightly longer gap of silence between them
-- Words have an even longer gap of silence between them
+- Each dot or dash has a short gap of silence after it (usually 1 dot length)
+- Letters in a word have a slightly longer gap of silence between them (usually 3 dot lengths)
+- Words have an even longer gap of silence between them (usually 7 dot lengths)
 
 You don't necessarily need to use sound for this, although this is the most common way Morse Code was used. You can do it with anything that can be turned on and off; this could be a torch, raising and lowering a flag or even just blinking your eyes fast and slow. This makes it one of the most versatile forms of telecommunication. There is even a formal international treaty which enshrines the Morse code for SOS `... --- ...` (Save Our Souls) as a universal distress signal.
 
@@ -311,10 +312,11 @@ Here is an example [video](https://www.youtube.com/watch?v=P7BT7aI1BPg).
 
 To program this, we should remind ourselves about the rules of International Morse Code:
 
+- All timings are defined as multiples of one dot length
 - A dash is three times the length of a dot
-- Each dot or dash has a short gap of silence after it
-- Letters in a word have a slightly longer gap of silence between them
-- Words have an even longer gap of silence between them
+- Each dot or dash has a short gap of silence after it (usually 1 dot length)
+- Letters in a word have a slightly longer gap of silence between them (usually 3 dot lengths)
+- Words have an even longer gap of silence between them (usually 7 dot lengths)
 
 So to start with, we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measuring the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
 
@@ -632,6 +634,18 @@ The aim of the game is to key in a message and see if the other person can decod
 *TIP:* If the message sounds like gibberish when you're decoding just keep going; the person behind the screen could be making mistakes. The aim is for you to have exactly what is shown on their screen, even if it's wrong!
 
 Good luck!
+
+## Further study of Morse Code
+
+One of the things you may wish to do is extend the decoding ability of this project to include punctuation characters like the full stop: `.-.-.-`, comma: `--..--` and question mark: `..--..`.  You may also wish to be able to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate.
+
+A comprehensive reference for International Morse can be found [here](https://www.itu.int/rec/R-REC-M.1677-1-200910-I/en) which covers English, French, Arabic, Chinese and Russian.
+
+There are also special procedural characters that conventionally mean things like wait, end of message or message part separator. These would certainly have been in use 100 years ago during 1914. Some of them are mentioned in the reference above but a more comprehensive discussion of Morse Code extensions can be found [here](http://ke1g.org/media/uploads/files/MorseExtension.pdf).
+
+If you're serious about learning Morse then I would suggest that you have a read of [this discussion](http://www.qsl.net/n1irz/finley.morse.html) regarding the **Koch Method** of Morse training. This is a tried and tested way to learn Morse by listening at 15 to 20 words per minute. There is also an existing [Python package](https://pypi.python.org/pypi/KochMorse/0.99.7) which provides a Gtk2 style interface that you could install and use.
+
+If you wish to use your `morse-code.py` project to *key in* at 15 to 20 words per minute you will need to modify some of the timing numbers that we hard coded. These are specifically in the `decoder_thread` function where we're testing `key_up_length >= 1.5` and `key_up_length >= 4.5` respectively. Those numbers would need to be reduced. I would recommend to reduce them in stages but ensure that the new word time (where we show a space) is always three times the length of the new letter time (where we decode the letter). Try 1 and 3 respectively and see how you fair on before going lower.
 
 ## Licence
 
