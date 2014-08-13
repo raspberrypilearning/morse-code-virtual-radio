@@ -1,5 +1,6 @@
+![](images/FWW_Centenary__Led_By_IWM_Red-web.png)
+
 # Introduction: what is Morse Code?
-![](images/FWW_Centenary__Led_By_IWM_Red-web.png) [www.1914.org](http://www.1914.org/)
 
 ![](images/qst_may_1942.png)
 
