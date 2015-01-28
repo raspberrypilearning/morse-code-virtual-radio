@@ -79,7 +79,7 @@ A real Morse Code key will bring this project to life, especially if you can acq
 
 ## Worksheet & included files
 
-- [The worksheet](WORKSHEET.md)
+- [The worksheet](worksheet.md)
 - (Optional) Final version of Python code [final_code.py](./final_code.py)
     - Download to your Pi with the following commands:
 
