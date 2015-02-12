@@ -1,3 +1,6 @@
 - name: Male-to-female jumper wires, at least 2
   img: jumper-male-to-female
   url: http://shop.pimoroni.com/products/jumper-jerky
+- name: Headphones or speakers (if not using HDMI audio)
+  img: headphones-speaker
+  url: 
