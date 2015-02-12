@@ -34,32 +34,9 @@ The chart below is the Morse code tree, and is really helpful when listening and
 
 Get a pencil and paper and see how you get on with this: [Listen to slow Morse Code](./sounds/slow_morse.mp3). Don't be intimidated if you find this hard; it's always tricky to start with. As with many things, the more you do it the easier it gets. In this resource we're going to program the Raspberry Pi to help you learn how to do this. You're going to build your own learning tool which will tell you if you're getting it right or not, so let's get set up.
 
-## Step 0: Setting up your Pi
+## Play a test beep
 
-First check that you have all the parts you need to get your Raspberry Pi set up and working.
-
-- Raspberry Pi
-- Micro USB power adaptor
-- An SD card with Raspbian already set up through NOOBS
-- USB keyboard
-- USB mouse
-- HDMI cable
-- A monitor or TV
-
-### Activity checklist:
-
-1. Place the SD card into the slot of your Raspberry Pi.
-1. Next connect the HDMI cable from the monitor or TV.
-1. Plug in the USB keyboard and mouse.
-1. Plug in the micro USB power supply.
-1. When prompted to login type:
-
-    ```bash
-    Login: pi
-    Password: raspberry
-    ```
-
-## Step 1: Play a test beep
+First boot up your Raspberry Pi and log in.
 
 Headphones are advisable in a classroom environment, so that the room doesn't descend into a cacophony of beeping. If you *are* using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
 
@@ -134,7 +111,7 @@ Now we can run the code; when you do, you should hear a nice two second long bee
 
 If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
 
-## Step 2: Connect the Morse Code key to the GPIO pins
+## Connect the Morse Code key to the GPIO pins
 
 ![](images/p1.png)
 
@@ -186,7 +163,7 @@ Both methods will work equally well; which one people use is often just personal
 
 Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
 
-## Step 3: Detect the key position through the GPIO pin value
+## Detect the key position through the GPIO pin value
 
 Enter the following command to edit our previous tone program:
 
@@ -242,7 +219,7 @@ HIGH
 
 Press `Ctrl - C` to quit.
 
-## Step 4: Play a tone when the key is down
+## Play a tone when the key is down
 
 We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code is still very basic. All we have is a loop that keeps polling the pin; the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
@@ -306,7 +283,7 @@ Now have a go at a short word. Early Nokia mobile phones used the Morse Code for
 
 Press `Ctrl - C` to quit.
 
-## Step 5: Decode the Morse as you go
+## Decode the Morse as you go
 
 What will really help you learn is having a way to know when you're getting the code right or wrong. We can program the Pi to decode what you're keying in and then print the letters to the screen as you go. With this you can pick a message, try to key it in and immediately see if the correct text is being displayed. If the wrong text comes up then it's likely that you didn't key in the correct Morse Code sequence. Practice makes perfect!
 
@@ -616,7 +593,7 @@ Press `Ctrl - C` to quit.
 
 You can ignore the message saying `Unhandled exception in thread`; this is just the child thread being terminated when you send the `KeyboardInterrupt` with `Ctrl - C`.
 
-## Step 6: Play a listening game with a friend
+## Play a listening game with a friend
 
 ![](images/decoding.png)
 
@@ -637,7 +614,7 @@ The aim of the game is to key in a message and see if the other person can decod
 
 Good luck!
 
-## Further study of Morse Code
+## What next?
 
 One of the things you may wish to do is extend the decoding ability of this project to include punctuation characters like the full stop `.-.-.-`, comma `--..--` and question mark `..--..`.  You may also wish to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate.
 
@@ -648,13 +625,3 @@ There are also special procedural characters that conventionally mean things lik
 If you're serious about learning Morse then I would suggest that you have a read of [this discussion](http://www.qsl.net/n1irz/finley.morse.html) regarding the **Koch Method** of Morse training. This is a tried and tested way to learn Morse by listening at 15 to 20 words per minute. There is also an existing [Python package](https://pypi.python.org/pypi/KochMorse/0.99.7) which provides a Gtk2 style interface that you could install and use.
 
 If you wish to use your `morse-code.py` project to *key in* at 15 to 20 words per minute you will need to modify some of the timing numbers that we hard coded. These are specifically in the `decoder_thread` function where we're testing `key_up_length >= 1.5` and `key_up_length >= 4.5` respectively. Those numbers would need to be reduced. I would recommend to reduce them in stages but ensure that the new word time (where we show a space) is always three times the length of the new letter time (where we decode the letter). Try 1 and 3 respectively and see how you fair before going lower.
-
-## Licence
-
-Unless otherwise specified, everything in this repository is covered by the following licence:
-
-![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
-
-***Morse Code Virtual Radio*** by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
-
-Based on a work at https://github.com/raspberrypilearning/morse-code
