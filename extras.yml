@@ -1,1 +1,9 @@
-- A Morse key
+- name: Morse Code key (new)
+  img: ![](images/MFJ-550.png)
+  url: http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550
+- name: Morse Code key (antique)
+  img: ![](images/antique_key.png)
+  url: http://search.ebay.co.uk/antique+morse+code+key
+- name: Morse Code key (home made)
+  img: ![](images/homebrew_key.png)
+  url:
