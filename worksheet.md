@@ -42,15 +42,6 @@ Headphones are advisable in a classroom environment, so that the room doesn't de
 
 `sudo amixer cset numid=3 1`
 
-Next we're going to use the Python `pygame` library to make some tone sounds.
-First verify that the package is installed using the following command:
-
-`sudo apt-get install python-pygame -y`
-
-If your SD card is up to date you should see the message:
-
-`python-pygame is already the newest version`
-
 Okay, now let's do some programming.  I'm going to provide some code to make the tone sound; you don't need to worry about its internal workings. For those of you that are interested, though, the code just inherits one of the `pygame` sound classes, and automatically generates the wave data for playing a tone at a specified frequency.
 
 Enter the following command to start editing a blank file:
