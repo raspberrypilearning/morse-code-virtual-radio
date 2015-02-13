@@ -1,6 +1,9 @@
+- name: Morse Code key
+  img: morse-key
+  url: http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550
 - name: Male-to-female jumper wires, at least 2
   img: jumper-male-to-female
   url: http://shop.pimoroni.com/products/jumper-jerky
 - name: Headphones or speakers (if not using HDMI audio)
   img: headphones-speaker
-  url: 
+  url: http://thepihut.com/products/mini-portable-speaker-for-the-raspberry-pi
