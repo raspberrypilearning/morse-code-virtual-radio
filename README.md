@@ -1,11 +1,12 @@
-![](images/FWW_Centenary__Led_By_IWM_Red-web.png)
 # Morse Code Virtual Radio
 
 How to program your Raspberry Pi to send, receive and decode Morse.
 
-![](images/cover.png)
+![](cover.png)
 
 2014 marks the 100th anniversary of the declaration of [World War 1](http://en.wikipedia.org/wiki/World_War_I), which began on the 28th of July 1914. Over 16 million people lost their lives and 20 million were injured, making it one of the bloodiest conflicts in human history. It became known as the Great War and, subsequently, the First World War. To commemorate this event, we've come up with a way for you to simulate and experience the main form of radio communication that was used back then. Imagine being alive one hundred years ago, and sending and receiving messages that could mean life and death using only tones!
+
+![](images/FWW_Centenary__Led_By_IWM_Red-web.png)
 
 *Note: This resource uses International Morse.*
 
@@ -30,22 +31,11 @@ How to program your Raspberry Pi to send, receive and decode Morse.
 
 ### Hardware
 
-- Raspberry Pi
-- Micro USB power adaptor
-- An SD Card with Raspbian already set up through NOOBS
-- USB keyboard
-- USB mouse
-- HDMI cable
-- Ethernet cable
-- LAN with Internet connection
-- A monitor or TV
-- **Male** to **Female** jumper wires, at least 2 (try [Pimoroni](http://shop.pimoroni.com/products/jumper-jerky))
+- 1 x [Morse Code key](http://www.nevadaradio.co.uk/amateur-radio/morse-keys/mfj-550)
+- 2 (or more) x [Male-to-female jumper wires](http://shop.pimoroni.com/products/jumper-jerky)
+- [Headphones or speakers](http://thepihut.com/products/mini-portable-speaker-for-the-raspberry-pi)
 
-### Software
-
-- python-pygame
-
-### Extras: A Morse Code key
+### Morse Code key options
 
 A real Morse Code key will bring this project to life, especially if you can acquire an antique one. These can often be found in local antique shops all over the country. Alternatively you can also buy one online; see the links below.
 
@@ -62,20 +52,6 @@ A real Morse Code key will bring this project to life, especially if you can acq
 - Make your own!
 
   ![](images/homebrew_key.png)
-
-### Time required
-
-- 2 to 3 hours
-
-## Steps
-
-1. Setting up your Pi
-1. Play a test beep
-1. Connect the Morse Code key to the GPIO pins
-1. Detect the key position through the GPIO pin value
-1. Play a tone when the key is down
-1. Decode the Morse as you go
-1. Play a listening game with a friend
 
 ## Worksheet & included files
 
@@ -94,7 +70,7 @@ A real Morse Code key will bring this project to life, especially if you can acq
 
 Unless otherwise specified, everything in this repository is covered by the following licence:
 
-![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)
+[![Creative Commons License](http://i.creativecommons.org/l/by-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 ***Morse Code Virtual Radio*** by the [Raspberry Pi Foundation](http://raspberrypi.org) is licenced under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
