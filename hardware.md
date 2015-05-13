@@ -12,6 +12,6 @@ A real Morse Code key will bring this project to life, especially if you can acq
 
   ![](images/antique_key.png)
 
-- Make your own!
+- Make your own! Instructions [like these](http://www.w1tp.com/perbuild.htm) are readily available online. 
 
   ![](images/homebrew_key.png)
