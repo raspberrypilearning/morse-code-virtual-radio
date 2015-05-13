@@ -597,7 +597,7 @@ Now that you have a way to verify the correctness of your keying, you can play a
 The other person should:
 
 - Have a printout of the Morse code tree
-- Some paper, a pencil, and a rubber
+- Some paper, a pencil, and an eraser
 - Be able to hear your Morse tones
 - Not be able to see your screen
 
