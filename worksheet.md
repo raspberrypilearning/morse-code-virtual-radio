@@ -80,7 +80,7 @@ class ToneSound(pygame.mixer.Sound):
         return samples
 ```
 
-You don't need to worry about the inner workings of this code, but, if you are interested, the code just inherits one of the `pygame` sound classes, and automatically generates the wave data for playing a tone at a specified frequency.
+You don't need to worry about the inner workings of this code, but, if you are interested, the code inherits one of the `pygame` sound classes, and automatically generates the wave data for playing a tone at a specified frequency.
 
 Don't worry if you've never seen a Python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
