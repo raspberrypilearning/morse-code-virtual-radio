@@ -133,7 +133,7 @@ We can do this in two ways:
   
   *Note: The 1kΩ R2 resistor is there in both circuits to give the GPIO pin a fail-safe protection, in case we mistakenly set the pin to be in OUTPUT mode.*
 
-Fortunately, the Raspberry Pi has all the above circuitry built in and we can select either a pull up or a pull down circuit *in our code* for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
+Fortunately, the Raspberry Pi has all the above circuitry built in and we can select either a pull up or a pull down circuit in our code for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
 
 - Pull up configuration
 
@@ -151,7 +151,7 @@ Both methods will work equally well; which one people use is often just personal
 
 ![](images/jumper_wires_key.png) 
 
-Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. *Make a note of which configuration you're using as you'll need to incorporate it into your programming later.*
+Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. **Make a note of which configuration you're using as you'll need to incorporate it into your programming later**.
 
 ## Detect the key position through the GPIO pin value
 
