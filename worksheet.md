@@ -84,7 +84,7 @@ You don't need to worry about the inner workings of this code, but, if you are i
 
 Don't worry if you've never seen a Python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
-Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz, so lets go for 800 Hz. In this code `tone_obj` is the object that has been created from the blueprint `ToneSound`.
+Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz, so let's go for 800 Hz. In this code, `tone_obj` is the object that has been created from the blueprint `ToneSound`.
 
 Add the following code to the very bottom of the file:
 
