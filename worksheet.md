@@ -36,7 +36,7 @@ The chart below is the Morse code tree, and is really helpful when listening and
 
 ![listening](images/morse_listening.png)
 
-Get a pencil and paper and see how you get on with this: [listen to slow Morse Code](slow_morse.mp3). Don't be intimidated if you find following the code hard; it's always tricky to start with. As with many things, the more you do it the easier it gets.
+Get a pencil and paper and see how you get on with this: [listen to slow Morse Code](./code/slow_morse.mp3). Don't be intimidated if you find following the code hard; it's always tricky to start with. As with many things, the more you do it the easier it gets.
 
 ## Play a test beep
 
