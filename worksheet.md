@@ -47,9 +47,7 @@ Headphones are advisable in a classroom environment, to avoid distracting others
 
 `sudo amixer cset numid=3 1`
 
-Okay, now let's do some programming.  I'm going to provide some code to make the tone sound; you don't need to worry about its internal workings. For those of you that are interested, though, the code just inherits one of the `pygame` sound classes, and automatically generates the wave data for playing a tone at a specified frequency.
-
-Enter the following command to start editing a blank file:
+First, we need some code to make the tone sound. Enter the following command to start editing a blank file:
 
 `nano morse-code.py`
 
@@ -81,6 +79,8 @@ class ToneSound(pygame.mixer.Sound):
                 samples[time] = -amplitude
         return samples
 ```
+
+You don't need to worry about the inner workings of this code, but, if you are interested, the code just inherits one of the `pygame` sound classes, and automatically generates the wave data for playing a tone at a specified frequency.
 
 Don't worry if you've never seen a Python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
