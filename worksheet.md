@@ -105,7 +105,7 @@ Now we can run the code; when you do, you should hear a nice two second long bee
 
 `./morse-code.py`
 
-If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
+If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi, remember that you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
 
 ## Connect the Morse Code key to the GPIO pins
 
