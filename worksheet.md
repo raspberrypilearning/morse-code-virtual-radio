@@ -100,7 +100,7 @@ Next, mark the file as executable with the following command:
 
 `chmod +x morse-code.py`
 
-Now we can run the code; when you do, you should hear a nice two second long beep:
+Now we can run the code; when you do, you should hear a nice two-second-long beep:
 
 `./morse-code.py`
 
