@@ -20,7 +20,7 @@ If you look at the chart below, the letter **A** is beep beeeeeep and the letter
 - Letters in a word have a slightly longer gap of silence between them (usually 3 dot lengths)
 - Words have an even longer gap of silence between them (usually 7 dot lengths)
 
-You don't necessarily need to use sound for this, although this is the most common way Morse Code was used. You can do it with anything that can be turned on and off; this could be a torch, raising and lowering a flag or even just blinking your eyes fast and slow. This makes it one of the most versatile forms of telecommunication. There is even a formal international treaty which enshrines the Morse code for SOS `... --- ...` (Save Our Souls) as a universal distress signal.
+You don't necessarily need to use sound for this, although this is the most common way Morse Code was used. You can do it with anything that can be turned on and off; this could be a torch, raising and lowering a flag or even just blinking your eyes quickly and slowly. This makes it one of the most versatile forms of telecommunication. There is even a formal international treaty which enshrines the Morse code for SOS `... --- ...` (Save Our Souls) as a universal distress signal.
 
 In the 1890's Morse Code was adapted for use with early [radio](http://en.wikipedia.org/wiki/Radio_communication) before it was possible to send and receive voice. It was done by simply sending pulses of a carrier wave at an agreed frequency. The recipient's radio would then just play an audible tone whenever the carrier was received. It was used extensively during both World Wars and is still used to this day by amateur radio operators.
 
