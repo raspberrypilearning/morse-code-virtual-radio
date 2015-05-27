@@ -112,7 +112,7 @@ All Morse Code keys work in a similar way to a push button or switch. They have 
 
 So to connect the Morse key to the GPIO pins, we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is used when you want to supply voltage to a device like an LED or buzzer. If we use input mode, a GPIO pin has a value that we can read in our code. If the pin has voltage going into it, the reading will be `1` (HIGH); if the pin was connected directly to ground (no voltage), the reading will be `0` (LOW). 
 
-So the goal is to use the Morse Code key to switch voltage on and off for a GPIO pin, thus making the reading of the pin change in our code when we press the key.
+The goal is to use the Morse Code key to switch voltage on and off for a GPIO pin, thus making the reading of the pin change in our code when we press the key.
 
 When a GPIO pin is in input mode the pin is said to be floating, meaning that it has no fixed voltage level. That's no good for what we want, as the pin will randomly float between HIGH and LOW. We need to categorically know that the key is either up or down. So we need to fix the voltage level to HIGH or LOW, and then make it change only when the key is pressed.
 
