@@ -1,5 +1,8 @@
 #!/usr/bin/python
-import pygame, time, RPi.GPIO as GPIO, thread
+import pygame
+import time
+from RPi import GPIO
+import thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -65,7 +68,7 @@ buffer = []
 
 thread.start_new_thread(decoder_thread, ())
 
-print "Ready"
+print("Ready")
 
 while True:
     wait_for_keydown(pin)
