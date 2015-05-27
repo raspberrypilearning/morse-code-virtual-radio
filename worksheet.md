@@ -1,10 +1,8 @@
-![](images/FWW_Centenary__Led_By_IWM_Red-web.png)
-
-#Morse Code Virtual Radio
+# Morse Code Virtual Radio
 
 This tutorial will show you how to connect a Morse key to the Raspberry Pi GPIO pins, and how to write code to play tones when you hold the key down. You will also decode the Morse that you're keying so that it comes up on the screen.
 
-##What is Morse Code?
+## What is Morse Code?
 
 ![](images/qst_may_1942.png)
 
@@ -26,9 +24,9 @@ In the 1890s Morse Code was adapted for use with early [radio](http://en.wikiped
 
 There are three essentials to using Morse:
 
-  - Knowing the code
-  - Being able to key it in
-  - Being able to decode it when listening
+- Knowing the code
+- Being able to key it in
+- Being able to decode it when listening
 
 The choice of the dot and dash sequence for each letter is not random. Samuel Morse chose them based on how often letters occurred in the English language used by his local newspaper. The more commonly-used a letter was, the fewer dots and dashes he chose, thereby making it faster to key in.
 
@@ -44,17 +42,22 @@ First boot up your Raspberry Pi and log in.
 
 Headphones are advisable in a classroom environment, to avoid distracting others around you. If you *are* using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
 
-`sudo amixer cset numid=3 1`
+```bash
+sudo amixer cset numid=3 1
+```
 
 First, we need some code to make the tone sound. Enter the following command to start editing a blank file:
 
-`nano morse-code.py`
+```bash
+nano morse-code.py
+```
 
 Now either copy and paste or enter the following code:
 
 ```python
 #!/usr/bin/python
-import pygame, time
+import pygame
+import time
 from array import array
 from pygame.locals import *
 
@@ -94,15 +97,19 @@ tone_obj.play(-1) #the -1 means to loop the sound
 time.sleep(2)
 tone_obj.stop()
 ```
-Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit.
+Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
 Next, mark the file as executable with the following command:
 
-`chmod +x morse-code.py`
+```python
+chmod +x morse-code.py
+```
 
 Now we can run the code; when you do, you should hear a nice two-second-long beep:
 
-`./morse-code.py`
+```python
+./morse-code.py
+```
 
 If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi, remember that you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
 
@@ -120,7 +127,7 @@ We can do this in two ways.
 
 ### A pull up circuit
 
-  Wire the GPIO pin to 3.3 volts through a large 10kΩ resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
+Wire the GPIO pin to 3.3 volts through a large 10kΩ resistor so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
 
   ![](images/pull_up.png)
 
@@ -156,12 +163,19 @@ Choose the pull up or down configuration you want to use and connect the female 
 
 Enter the following command to edit our previous tone program:
 
-`nano morse-code.py`
+```bash
+nano morse-code.py
+```
 
 To give us access to the GPIO pins in our code, we need to import the `RPi.GPIO` library.
+
 Add `RPi.GPIO as GPIO` to the `import` line at the top so that it reads:
 
-`import pygame, time, RPi.GPIO as GPIO`
+```python
+import pygame
+import time
+from RPi import GPIO
+```
 
 At the bottom remove these lines (they will be put back in again later):
 
@@ -182,15 +196,17 @@ GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
     reading = GPIO.input(pin)
-    print "HIGH" if reading else "LOW"
+    print("HIGH" if reading else "LOW")
     time.sleep(1)
 ```
 
-Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit.
+Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
 GPIO functions require root access on your Pi, so from now on you must use the `sudo` command to run your code. If you don't use `sudo` you'll see the following error: `No access to dev/mem. Try running as root!`
 
-`sudo ./morse-code.py`
+```bash
+sudo ./morse-code.py
+```
 
 If you're using a pull up, the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down. The output should look something like this:
 
@@ -206,7 +222,7 @@ HIGH
 HIGH
 ```
 
-Press `Ctrl - C` to quit.
+Press `Ctrl + C` to quit.
 
 ## Play a tone when the key is down
 
@@ -245,7 +261,7 @@ pin = 7
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-print "Ready"
+print("Ready")
 
 while True:
     wait_for_keydown(pin)
@@ -260,17 +276,19 @@ Enter the following command to edit our previous program:
 
 Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above. If necessary, modify it for a pull down configuration.
 
-Press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit.
+Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
 You can now test your code. Remember to use the `sudo` command.
 
-`sudo ./morse-code.py`
+```bash
+sudo ./morse-code.py
+```
 
 After the you see the `Ready` message you should be able to start doing your first Morse Code messages. Give the key a good test to make sure that the tone is only ever on when the key is down, and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
 
 Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do; the Morse Code for SMS is `... -- ...`, and feel free to Google *nokia sms tone* to double-check. Try other words using the chart at the top.
 
-Press `Ctrl - C` to quit.
+Press `Ctrl + C` to quit.
 
 ## Decode the Morse as you go
 
@@ -317,7 +335,7 @@ DASH = "-"
 key_down_time = 0
 key_down_length = 0
 
-print "Ready"
+print("Ready")
 
 while True:
     wait_for_keydown(pin)
@@ -328,18 +346,22 @@ while True:
     tone_obj.stop()
     
     if key_down_length > 0.15:
-        print DASH
+        print(DASH)
     else:
-        print DOT
+        print(DOT)
 ```
 
 Enter the following command to edit our previous program:
 
-`nano morse-code.py`
+```bash
+nano morse-code.py
+```
 
-Scroll to the bottom and add the lines shown above that are missing from your code. If necessary, modify it for a pull down configuration. When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit. You can now test your code. Remember to use the `sudo` command.
+Scroll to the bottom and add the lines shown above that are missing from your code. If necessary, modify it for a pull down configuration. When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. Remember to use the `sudo` command.
 
-`sudo ./morse-code.py`
+```bash
+sudo ./morse-code.py
+```
 
 Use the Morse key to make some long and short tones. You should see dots and dashes appearing at the moment when you release the key. The output will look something like this:
 
@@ -354,7 +376,7 @@ Use the Morse key to make some long and short tones. You should see dots and das
 .
 ```
 
-Press `Ctrl - C` to quit.
+Press `Ctrl + C` to quit.
 
 ### Translate into text
 
@@ -365,11 +387,15 @@ Next, we need a way to combine these dots and dashes to form letters and words. 
 
 I am going to provide some code to make this easier. This code will allow you to take a string of dots and dashes and look up the corresponding letter of the alphabet. Enter the following command to download this code:
 
-`wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate`
+```bash
+wget https://goo.gl/aRjulj -O morse_lookup.py --no-check-certificate
+```
 
 Now let's have a quick look at it. Enter the command below to edit the file:
 
-`nano morse_lookup.py`
+```bash
+nano morse_lookup.py
+```
 
 The `morse_code_lookup` variable is a Python *dictionary* object. A dictionary works using keys and values; for every key there is a corresponding value. You could create a dictionary to translate between, say, English and French. The key could be *Hello* and the value would be *Bonjour*. Look at the code below as an example:
 
@@ -378,16 +404,16 @@ english_to_french = {
     "Hello": "Bonjour",
     "Yes": "Oui",
     "No": "Non"
-    }
+}
     
-print english_to_french["Hello"]
+print(english_to_french["Hello"])
 ```
 
 The result of the above code would be: `Bonjour`.
 
 We're going to use this technique to translate between the sequence of dots and dashes and their corresponding letter. For example, `-.-.` is the letter `C`. The `try_decode` function at the bottom can be used to check that a dot-dash sequence is valid and, if so, translate it into the corresponding letter.
 
-Press `Ctrl - X` to quit from editing without saving.
+Press `Ctrl + X` to quit from editing without saving.
 
 ### Multithreading concept
 
@@ -401,7 +427,9 @@ The overall goal here will be to modify the main *thread* so that it stores ever
 
 Now lets go back to editing our main program. Enter the following command:
 
-`nano morse-code.py`
+```bash
+nano morse-code.py
+```
 
 Firstly, we need to add two new variables. `key_up_time` is to record when the key was released so that the length of silent gaps can be measured in our code. The other is called `buffer`; this is a list which will temporarily hold the dots and dashes before a full word is complete.
 
@@ -418,7 +446,7 @@ key_down_length = 0
 key_up_time = 0
 buffer = []
 
-print "Ready"
+print("Ready")
 
 while True:
     wait_for_keydown(pin)
@@ -431,13 +459,16 @@ while True:
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
 
-Double-check that your code is the same as the above. When you're done, press `Ctrl - O` then `Enter` to save. We're not finished editing yet though; do not run the code as it is. We still need to add code for the new *thread*.
+Double-check that your code is the same as the above. When you're done, press `Ctrl + O` then `Enter` to save. We're not finished editing yet though; do not run the code as it is. We still need to add code for the new *thread*.
 
 First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
 
 ```python
 #!/usr/bin/python
-import pygame, time, RPi.GPIO as GPIO, thread
+import pygame
+import time
+from RPi import GPIO
+import thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -478,15 +509,20 @@ Next is an `if` statement. There are two conditions upon which we need to act he
 
 The choice of `1.5` and `4.5` seconds is essentially arbitrary, but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves, you may wish to reduce these numbers in your code. This will allow you to key in the code faster, but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 seconds respectively and I am sure there are ex-telegraph operators out there that could have these values much lower!
 
-Press `Ctrl - O` then `Enter` to save. There is one more thing we need to do before we can run our code, which is to add a line of code that will *launch* the new thread. This has to be done from the *main thread*, so scroll down and find the `print "Ready"` line. Add the line below just before it:
+Press `Ctrl + O` then `Enter` to save. There is one more thing we need to do before we can run our code, which is to add a line of code that will *launch* the new thread. This has to be done from the *main thread*, so scroll down and find the `print("Ready")` line. Add the line below just before it:
 
-`thread.start_new_thread(decoder_thread, ())`
+```bash
+thread.start_new_thread(decoder_thread, ())
+```
 
 The **final code** should look like this; remember to make the necessary changes if you're using a pull down instead of up. Do one last check:
 
 ```python
 #!/usr/bin/python
-import pygame, time, RPi.GPIO as GPIO, thread
+import pygame
+import time
+from RPi import GPIO
+import thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -552,7 +588,7 @@ buffer = []
 
 thread.start_new_thread(decoder_thread, ())
 
-print "Ready"
+print("Ready")
 
 while True:
     wait_for_keydown(pin)
@@ -564,9 +600,14 @@ while True:
     tone_obj.stop()
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
-When you're done press `Ctrl - O` then `Enter` to save followed by `Ctrl - X` to quit. You can now test your code. Remember to use the `sudo` command.
 
-`sudo ./morse-code.py`
+When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. 
+
+Remember to use the `sudo` command.
+
+```bash
+sudo ./morse-code.py
+```
 
 Wait for the `Ready` message to show and then begin. *TIP:* The trick is to watch the screen and wait for a letter to appear before you start keying in the next one. You may wish to refer to the charts at the top of this page.
 
@@ -576,11 +617,13 @@ Hello is `....` `.` `.-..` `.-..` `---`
 
 The output should look like this:
 
-`SOS HELLO `
+```
+SOS HELLO 
+```
 
-Press `Ctrl - C` to quit.
+Press `Ctrl + C` to quit.
 
-You can ignore the message saying `Unhandled exception in thread`; this is just the child thread being terminated when you send the `KeyboardInterrupt` with `Ctrl - C`.
+You can ignore the message saying `Unhandled exception in thread`; this is just the child thread being terminated when you send the `KeyboardInterrupt` with `Ctrl + C`.
 
 ## Play a listening game with a friend
 
