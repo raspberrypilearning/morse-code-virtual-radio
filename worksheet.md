@@ -236,7 +236,7 @@ We can do this by defining two functions called `wait_for_keyup` and `wait_for_k
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
-Have a look at the code below. This is for a pull up configuration; if you're using pull down your `GPIO.setup` line will have `GPIO.PUD_DOWN`, and you would just need to move the `not` keyword from `wait_for_keyup` into the same place in `wait_for_keydown`.
+Have a look at the code below. Remember that this is for a pull up configuration; if you're using a pull down configuration, your `GPIO.setup` line will have `GPIO.PUD_DOWN`, and you would need to move the `not` keyword from `wait_for_keyup` into the same place in `wait_for_keydown`.
 
 ```python
 def wait_for_keydown(pin):
@@ -266,7 +266,7 @@ Enter the following command to edit our previous program:
 
 `nano morse-code.py`
 
-Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above. If necessary, modify it for a pull down configuration.
+Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above. Remember to make the necessary modifications iw you are using a pull-down configuration.
 
 Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
@@ -276,17 +276,15 @@ You can now test your code. Remember to use the `sudo` command.
 sudo ./morse-code.py
 ```
 
-After the you see the `Ready` message you should be able to start doing your first Morse Code messages. Give the key a good test to make sure that the tone is only ever on when the key is down, and off when the key is up. If you've got it the wrong way around check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
+After the you see the `Ready` message you should be able to start keying in your first Morse Code messages. Test the Morse key to make sure that the tone is only ever on when the key is down, and off when the key is up. If you've got it the wrong way around, check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
 
-Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do; the Morse Code for SMS is `... -- ...`, and feel free to Google *nokia sms tone* to double-check. Try other words using the chart at the top.
+Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do; the Morse Code for SMS is `... -- ...`. Try keying in other words using the chart at the top.
 
 Press `Ctrl + C` to quit.
 
 ## Decode the Morse as you go
 
 What will really help you learn is having a way to know when you're getting the code right or wrong. We can program the Pi to decode what you're keying in and then print the letters to the screen as you go. With this you can pick a message, try to key it in and immediately see if the correct text is being displayed. If the wrong text comes up then it's likely that you didn't key in the correct Morse Code sequence. Practice makes perfect!
-
-Here is an example [video](https://www.youtube.com/watch?v=P7BT7aI1BPg).
 
 To program this, we should remind ourselves about the rules of International Morse Code:
 
@@ -296,7 +294,7 @@ To program this, we should remind ourselves about the rules of International Mor
 - Letters in a word have a slightly longer gap of silence between them (usually 3 dot lengths)
 - Words have an even longer gap of silence between them (usually 7 dot lengths)
 
-So to start with, we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do *that* we can time how long the key is up for, so we're measuring the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
+So to start with, we need to tell the difference between a dot and a dash. We can do that by timing how long the key is held down for to give us the length of the tone. Then we need to tell the difference between the dots and dashes making up one word and the next. To do that, we can time how long the key is up for, so we're measuring the gap of silence between the tones. The same measurement of time will also give us the difference between letters making up a word and separate words.
 
 ### Distinguish dot and dash
 
