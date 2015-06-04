@@ -38,7 +38,7 @@ Get a pencil and paper and see how you get on with this: [listen to slow Morse C
 
 First boot up your Raspberry Pi and log in.
 
-Headphones are advisable in a classroom environment, to avoid distracting others around you. If you *are* using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
+As this exercise involves noise, you should use headphones if you are in a classroom environment, to avoid distracting others around you. If you are using headphones or a speaker on the Raspberry Pi, you will need to run the following command to redirect sound to the headphone socket:
 
 ```bash
 sudo amixer cset numid=3 1
