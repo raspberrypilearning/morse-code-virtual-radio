@@ -298,9 +298,9 @@ So to start with, we need to tell the difference between a dot and a dash. We ca
 
 ### Distinguish dot and dash
 
-Let's firstly program the Pi to recognise the difference between a dot and a dash.
+First, we need to program the Pi to recognise the difference between a dot and a dash.
 
-The aim is to time how long the key is held down for. Generally speaking, a dot is about 0.15 seconds or less and anything longer than this is a dash. You're welcome to use a different value if you wish but I recommend 0.15. The way to time something in code is to record the time now, wait until something has happened and then subtract the time you recorded from the current time.
+The aim is to time how long the key is held down for. Generally speaking, a dot is about 0.15 seconds or less and anything longer than this is a dash. You're welcome to use a different value if you wish but 0.15 seconds is a good starting point. The way to time something in code is to record the time now, wait until something has happened, and then subtract the time you recorded from the current time.
 
 Take a look at the code below; notice the the use of the `key_down_time` and `key_down_length` variables.
 
@@ -347,7 +347,7 @@ Enter the following command to edit our previous program:
 nano morse-code.py
 ```
 
-Scroll to the bottom and add the lines shown above that are missing from your code. If necessary, modify it for a pull down configuration. When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. Remember to use the `sudo` command.
+Scroll to the bottom and add the lines shown above that are missing from your original code. If necessary, modify the code for a pull down configuration. When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. Remember to use the `sudo` command.
 
 ```bash
 sudo ./morse-code.py
@@ -368,26 +368,26 @@ Use the Morse key to make some long and short tones. You should see dots and das
 
 Press `Ctrl + C` to quit.
 
-### Translate into text
+### Translate Morse Code into text
 
-Next, we need a way to combine these dots and dashes to form letters and words. This is actually a little more tricky than it sounds. Consider how we're going to know when the user has finished a letter and when they have finished a word. The correct behaviour will be the following:
+Next, we need a way to combine these dots and dashes to form letters and words. This is actually a little more tricky than it sounds. Consider how we're going to know when the user has finished keying in a letter and when they have finished a word. The correct behaviour will be the following:
 
-- When they finish a letter, display the *letter*
-- When they finish a word, display a *space character*
+- When they finish keying in a letter, display the *letter*
+- When they finish keying in a word, display a *space character*
 
-I am going to provide some code to make this easier. This code will allow you to take a string of dots and dashes and look up the corresponding letter of the alphabet. Enter the following command to download this code:
+The following code should make this easier, by allowing you to take a string of dots and dashes and look up the corresponding letter of the alphabet. Enter the following command to download this code:
 
 ```bash
 wget https://goo.gl/aRjulj -O morse_lookup.py --no-check-certificate
 ```
 
-Now let's have a quick look at it. Enter the command below to edit the file:
+Now let's have a look at it. Enter the command below to edit the file:
 
 ```bash
 nano morse_lookup.py
 ```
 
-The `morse_code_lookup` variable is a Python *dictionary* object. A dictionary works using keys and values; for every key there is a corresponding value. You could create a dictionary to translate between, say, English and French. The key could be *Hello* and the value would be *Bonjour*. Look at the code below as an example:
+The `morse_code_lookup` variable is a Python dictionary object. A dictionary works using keys and values; for every key there is a corresponding value. You could create a dictionary to translate between, say, English and French. The key could be "Hello" and the value would be "Bonjour". Look at the code below as an example:
 
 ```python
 english_to_french = {
@@ -407,11 +407,11 @@ Press `Ctrl + X` to quit from editing without saving.
 
 ### Multithreading concept
 
-I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A *thread* in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time; it's like making a program pat its head and rub its stomach at the same time.
+We need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time: this is like making a program pat its head and rub its stomach at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions, we need to have another thread which can constantly do the work of decoding what the user is keying in.
 
-The overall goal here will be to modify the main *thread* so that it stores every dot and dash in a buffer list. The decoder *thread* will then be watching independently for different lengths of silence. If it's a short gap of silence then that’s a new letter, so it will use the `try_decode` function to see if the buffer contents matches a letter; it will also empty the buffer, ready for the next word. If the gap of silence gets longer, then it's a new word and we should show a space character.
+The overall goal here will be to modify the main thread so that it stores every dot and dash in a buffer list. The decoder thread will then be watching independently for different lengths of silence. A short gap of silence denotes a new letter, so the thread will use the `try_decode` function to see if the buffer contents matches a letter; it will also empty the buffer. If the gap of silence gets longer, this denotes a new word and a space character would be shown.
 
 ### Add the code
 
@@ -449,7 +449,7 @@ while True:
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
 
-Double-check that your code is the same as the above. When you're done, press `Ctrl + O` then `Enter` to save. We're not finished editing yet though; do not run the code as it is. We still need to add code for the new *thread*.
+Double-check that your code is the same as the above. When you're done, press `Ctrl + O` then `Enter` to save. We're not finished editing, yet, though; do not run the code as it is. We still need to add code for the new thread.
 
 First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
 
@@ -464,7 +464,7 @@ from pygame.locals import *
 from morse_lookup import *
 ```
 
-Next, let's put in the code that will run on our separate *thread*. To do this, you can just define a function and this will be what is run *on* that thread. Add this function to your code just below the `wait_for_keyup` function:
+Next, let's put in the code that will run on our separate thread. To do this, you can just define a function and this will be what is run on that thread. Add this function to your code just below the `wait_for_keyup` function:
 
 ```python
 def decoder_thread():
