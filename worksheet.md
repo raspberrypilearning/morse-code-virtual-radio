@@ -632,12 +632,8 @@ Try not to write dots and dashes; instead try to get into the zone of listening 
 
 ## What next?
 
-One of the things you may wish to do is extend the decoding ability of this project to include punctuation characters like the full stop `.-.-.-`, comma `--..--` and question mark `..--..`.  You may also wish to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate.
-
-A comprehensive reference for International Morse can be found [here](https://www.itu.int/rec/R-REC-M.1677-1-200910-I/en) which covers English, French, Arabic, Chinese and Russian.
-
-There are also special procedural characters that conventionally mean things like wait, end of message or message part separator. These would certainly have been in use 100 years ago during 1914. Some of them are mentioned in the reference above but a more comprehensive discussion of Morse Code extensions can be found [here](http://ke1g.org/media/uploads/files/MorseExtension.pdf).
-
-If you're serious about learning Morse then I would suggest that you have a read of [this discussion](http://www.qsl.net/n1irz/finley.morse.html) regarding the **Koch Method** of Morse training. This is a tried and tested way to learn Morse by listening at 15 to 20 words per minute. There is also an existing [Python package](https://pypi.python.org/pypi/KochMorse/0.99.7) which provides a Gtk2 style interface that you could install and use.
-
-If you wish to use your `morse-code.py` project to *key in* at 15 to 20 words per minute you will need to modify some of the timing numbers that we hard coded. These are specifically in the `decoder_thread` function where we're testing `key_up_length >= 1.5` and `key_up_length >= 4.5` respectively. Those numbers would need to be reduced. I would recommend to reduce them in stages but ensure that the new word time (where we show a space) is always three times the length of the new letter time (where we decode the letter). Try 1 and 3 respectively and see how you fair before going lower.
+- Why not extend the decoding ability of this project to include punctuation characters like the full stop `.-.-.-`, comma `--..--` and question mark `..--..`?  
+- You could try to decode Morse in other languages. To do this you will need to edit the file `morse_lookup.py` and add the dictionary entries as appropriate. A comprehensive reference for International Morse can be found [here](https://www.itu.int/rec/R-REC-M.1677-1-200910-I/en), covering English, French, Arabic, Chinese and Russian.
+- You could explore Morse Code extensions: these are special procedural characters that mean things like wait, end of message or message part separator. You can find more information on these extensions [here](http://ke1g.org/media/uploads/files/MorseExtension.pdf).
+- You could take your Morse Code knowledge further with the [Koch Method](http://www.qsl.net/n1irz/finley.morse.html), a tried and tested way to learn Morse by listening at 15 to 20 words per minute. There is also an existing [Python package](https://pypi.python.org/pypi/KochMorse/0.99.7) which provides a Gtk2 style interface that you could install and use.
+- Can you work out how to modify the timing numbers we hard coded to enable you to use your `morse-code.py` project to key in at 15 to 20 words per minute? Try changing the `key_up_length` in the `decoder_thread` function. 
