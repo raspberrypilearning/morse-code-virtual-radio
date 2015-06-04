@@ -4,8 +4,6 @@ This tutorial will show you how to connect a Morse key to the Raspberry Pi GPIO 
 
 ## What is Morse Code?
 
-![](images/qst_may_1942.png)
-
 Invented by [Samuel Morse](http://en.wikipedia.org/wiki/Samuel_F._B._Morse) in 1836, Morse Code is a method for sending and receiving text messages using short and long beeps. Conventionally, a short beep is called a *dot* and a long one is a *dash* (also known as a *dit* and a *dah*). Every letter of the alphabet has a unique sequence of dots and dashes.
 
 If you look at the chart below, the letter **A** is beep beeeeeep and the letter **B** is beeeeeep beep beep beep.
@@ -417,7 +415,7 @@ Press `Ctrl + X` to quit from editing without saving.
 
 ### Multithreading concept
 
-I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A *thread* in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time; it's like making a program pat its head and rub its belly at the same time.
+I need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A *thread* in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time; it's like making a program pat its head and rub its stomach at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions, we need to have another thread which can constantly do the work of decoding what the user is keying in.
 
@@ -425,7 +423,7 @@ The overall goal here will be to modify the main *thread* so that it stores ever
 
 ### Add the code
 
-Now lets go back to editing our main program. Enter the following command:
+Now let's go back to editing our main program. Enter the following command:
 
 ```bash
 nano morse-code.py
@@ -627,8 +625,6 @@ You can ignore the message saying `Unhandled exception in thread`; this is just 
 
 ## Play a listening game with a friend
 
-![](images/decoding.png)
-
 Now that you have a way to verify the correctness of your keying, you can play a listening game with a friend.
 
 The other person should:
@@ -643,8 +639,6 @@ The aim of the game is to key in a message and see if the other person can decod
 *TIP:* Try not to write dots and dashes; instead try to get into the zone of listening to the tones, following the tree and arriving at a letter. Write down letters!
 
 *TIP:* If the message sounds like gibberish when you're decoding just keep going; the person behind the screen could be making mistakes. The aim is for you to have exactly what is shown on their screen, even if it's wrong!
-
-Good luck!
 
 ## What next?
 
