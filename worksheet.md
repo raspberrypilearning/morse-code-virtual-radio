@@ -372,8 +372,8 @@ Press `Ctrl + C` to quit.
 
 Next, we need a way to combine these dots and dashes to form letters and words. This is actually a little more tricky than it sounds. Consider how we're going to know when the user has finished keying in a letter and when they have finished a word. The correct behaviour will be the following:
 
-- When they finish keying in a letter, display the *letter*
-- When they finish keying in a word, display a *space character*
+- When they finish keying in a letter, display the letter
+- When they finish keying in a word, display a space character
 
 The following code should make this easier, by allowing you to take a string of dots and dashes and look up the corresponding letter of the alphabet. Enter the following command to download this code:
 
@@ -387,7 +387,7 @@ Now let's have a look at it. Enter the command below to edit the file:
 nano morse_lookup.py
 ```
 
-The `morse_code_lookup` variable is a Python dictionary object. A dictionary works using keys and values; for every key there is a corresponding value. You could create a dictionary to translate between, say, English and French. The key could be "Hello" and the value would be "Bonjour". Look at the code below as an example:
+The `morse_code_lookup` variable is a Python dictionary object. A dictionary works using keys and values; for every key there is a corresponding value. You could create a dictionary to translate between, say, English and French. In this case, if the key was "Hello", the value would be "Bonjour". Look at the code below as an example:
 
 ```python
 english_to_french = {
@@ -405,9 +405,9 @@ We're going to use this technique to translate between the sequence of dots and 
 
 Press `Ctrl + X` to quit from editing without saving.
 
-### Multithreading concept
+### Multithreading 
 
-We need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time: this is like making a program pat its head and rub its stomach at the same time.
+Here, we need to introduce a new programming concept called [multithreading](http://en.wikipedia.org/wiki/Multithreading_%28software%29#Multithreading). A thread in a program is a single sequence of instructions that are being followed by the computer at any one time. In most simple programs there is only one thread, which is the main one. But it is possible to have multiple threads going at the same time: this is like making a program pat its head and rub its stomach at the same time.
 
 Because our main thread is always held up by the `wait_for_keydown` and `wait_for_keyup` functions, we need to have another thread which can constantly do the work of decoding what the user is keying in.
 
@@ -485,27 +485,27 @@ def decoder_thread():
             sys.stdout.flush()
 ```
 
-Let's go through this. The first thing you'll notice is the use of the `global` keyword. This will give the thread access to the `key_up_time` and `buffer` variables that belong to the main thread, so that they can be used here. Next, we have a variable called `new_word`. Once the end of the word has been detected we set this to `False`, so that we don't keep putting more spaces down.
+The first thing you'll notice is the use of the `global` keyword. This will give the thread access to the `key_up_time` and `buffer` variables that belong to the main thread, so that they can be used here. Next, we have a variable called `new_word`. Once the end of the word has been detected we set this to `False`, so that we don't keep putting more spaces down.
 
 We then have another `while True` loop; the main purpose of this is to continually monitor the gaps of silence between tones. You'll see there is a `sleep` command to avoid overloading the CPU; then we calculate the `key_up_length`, which is the `key_up_time` from the main thread subtracted from the current time. Every time around the loop, which is every 0.01 seconds, the `key_up_length` value will increase as long as the Morse key stays up.
 
 Next is an `if` statement. There are two conditions upon which we need to act here:
 
-1. The first condition is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard-coding the value of `1.5` seconds for this. If this situation happens we know we're in a new word, so we set the `new_word` variable to `True`. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list, and turning them into a single string that might be something like `.-..`. We can then see if that matches a key in the Morse translation dictionary via the `try_decode` function. The `try_decode` function displays the result. We then empty the buffer, ready for the next word, with `del buffer[:]`. If we didn't do this, the buffer would just get bigger and bigger, and would never match any letters in the `morse_lookup.py` dictionary.
+- The first condition is when there is something in the `buffer` and the gap of silence is big enough to mean a new letter. We're hard-coding the value of `1.5` seconds for this. If this situation happens we know we're in a new word, so we set the `new_word` variable to `True`. The line `bit_string = "".join(buffer)` is taking the dots and dashes in the `buffer` list, and turning them into a single string that might be something like `.-..`. We can then see if that matches a key in the Morse translation dictionary via the `try_decode` function. The `try_decode` function displays the result. We then empty the buffer, ready for the next word, with `del buffer[:]`. If we didn't do this, the buffer would keep getting bigger, and would never match any letters in the `morse_lookup.py` dictionary.
 
-1. The second condition is when the gap of silence has increased to `4.5` seconds. Remember a rule of Morse is that the gap of silence for a new word has to be three times the length that means a new letter: `1.5 x 3 = 4.5`. So here we just set `new_word` to False, so that the `else if` condition no longer succeeds, and then put down a space character.
+-  The second condition is when the gap of silence has increased to `4.5` seconds. Remember that a rule of Morse is that the gap of silence for a new word has to be three times the length of the gap that denotes a new letter: `1.5 x 3 = 4.5`. So here we set `new_word` to False, so that the `else if` condition no longer succeeds, and then put down a space character.
 
-*Note:* The use of `sys.stdout` is so that we can print to the screen without having to always show a new line, as with the default `print` command.
+Note that the use of `sys.stdout` is so that we can print to the screen without having to always show a new line, as with the default `print` command.
 
-The choice of `1.5` and `4.5` seconds is essentially arbitrary, but they are about right for someone who is new to Morse and will be going quite slowly. As your skill improves, you may wish to reduce these numbers in your code. This will allow you to key in the code faster, but it also demands a greater level of skill from you. I can cope with 0.75 and 2.25 seconds respectively and I am sure there are ex-telegraph operators out there that could have these values much lower!
+The choice of `1.5` and `4.5` seconds is essentially arbitrary, but these gaps are about right for someone who is new to Morse, who will be going quite slowly. As your skill improves, you may wish to reduce these numbers in your code. 
 
-Press `Ctrl + O` then `Enter` to save. There is one more thing we need to do before we can run our code, which is to add a line of code that will *launch* the new thread. This has to be done from the *main thread*, so scroll down and find the `print("Ready")` line. Add the line below just before it:
+Press `Ctrl + O` then `Enter` to save. There is one more thing we need to do before we can run our code, which is to add a line of code that will launch the new thread. This has to be done from the main thread, so scroll down and find the `print("Ready")` line. Add the line below just before it:
 
 ```bash
 thread.start_new_thread(decoder_thread, ())
 ```
 
-The **final code** should look like this; remember to make the necessary changes if you're using a pull down instead of up. Do one last check:
+The final code should look like the example below; remember to make the necessary changes if you're using a pull down configuration instead of pull up. 
 
 ```python
 #!/usr/bin/python
@@ -591,7 +591,7 @@ while True:
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
 
-When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. 
+When you're done, press `Ctrl + O` then `Enter` to save, followed by `Ctrl + X` to quit. You can now test your code. 
 
 Remember to use the `sudo` command.
 
@@ -599,7 +599,7 @@ Remember to use the `sudo` command.
 sudo ./morse-code.py
 ```
 
-Wait for the `Ready` message to show and then begin. *TIP:* The trick is to watch the screen and wait for a letter to appear before you start keying in the next one. You may wish to refer to the charts at the top of this page.
+Wait for the `Ready` message to show and then begin keying Morse Code in. The trick is to watch the screen and wait for a letter to appear before you start keying in the next one. You may wish to refer to the charts at the top of this page.
 
 SOS is `...` `---` `...`
 
