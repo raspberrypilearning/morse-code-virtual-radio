@@ -4,7 +4,7 @@ This tutorial will show you how to connect a Morse key to the Raspberry Pi GPIO 
 
 ## What is Morse Code?
 
-Invented by Samuel Morse in 1836, Morse Code is a method for sending and receiving text messages using short and long beeps. Conventionally, a short beep is called a *dot* and a long one is a *dash* (also known as a *dit* and a *dah*). Every letter of the alphabet has a unique sequence of dots and dashes.
+Invented by Samuel Morse in 1836, Morse Code is a method for sending and receiving text messages using short and long beeps. Conventionally, a short beep is called a **dot** and a long one is a **dash** (also known, respectively, as a **dit** and a **dah**). Every letter of the alphabet has a unique sequence of dots and dashes.
 
 If you look at the chart below, the letter **A** is beep beeeeeep and the letter **B** is beeeeeep beep beep beep.
 
@@ -28,7 +28,7 @@ There are three essentials to using Morse:
 
 The choice of the dot and dash combination for each letter is not random. Samuel Morse based his decision on how often letters occurred in the English language used by his local newspaper. The more commonly-used a letter was, the fewer dots and dashes he chose, thereby making it faster to key in.
 
-The chart below is the Morse Code tree, and is really helpful when listening and decoding; you might want to print it out and keep it in front of you. You can see that **E** and **T** are the most common letters. So you start at the top, go to the *left* if you hear a dot and to the *right* if you hear a dash. You can double-check this against the first chart: try it now for the letters **A** and **B**.
+The chart below is the Morse Code tree, and is really helpful when listening and decoding; you might want to print it out and keep it in front of you. You can see that **E** and **T** are the most common letters. So you start at the top, go to the left if you hear a dot and to the right if you hear a dash. You can double-check this against the first chart: try it now for the letters **A** and **B**.
 
 ![listening](images/morse_listening.png)
 
@@ -84,7 +84,7 @@ You don't need to worry about the inner workings of this code, but, if you are i
 
 Don't worry if you've never seen a Python [class](http://en.wikipedia.org/wiki/Class_%28computer_programming%29) before. A class is like a blueprint of code that you can re-use multiple times. An instance of a class is known as an [object](http://en.wikipedia.org/wiki/Object-oriented_programming).
 
-Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz, so let's go for 800 Hz. In this code, `tone_obj` is the object that has been created from the blueprint `ToneSound`.
+Typical Morse Code tones are somewhere between 400 Hz and 1000 Hz; in this project, we will use a frequency of 800 Hz. In this code, `tone_obj` is the object that has been created from the blueprint `ToneSound`.
 
 Add the following code to the very bottom of the file:
 
@@ -109,19 +109,17 @@ Now we can run the code; when you do, you should hear a nice two-second-long bee
 ./morse-code.py
 ```
 
-If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi, remember that you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones that we make will sound correct.
+If you didn't hear anything then double-check everything is plugged in correctly. If you're using the headphone jack of the Pi, remember that you'll need to use the command `sudo amixer cset numid=3 1` to redirect the audio. You may notice the tone sounds a bit wobbly at the start; this is just an artefact of `pygame` starting up and using up CPU cycles. Subsequent tones will sound correct.
 
 ## Connect the Morse Code key to the GPIO pins
 
-All Morse Code keys work in a similar way to a push button or switch. They have two screw terminals for attaching a positive and a negative wire. When you press the key down, two bits of metal touch, causing a circuit to complete. The effect would be the same if you just touched the two wires together.
+All Morse Code keys work in a similar way to a push button or switch. They have two screw terminals, to which a positive and a negative wire are attached. When you press the key down, two bits of metal touch, causing a circuit to complete. The effect would be the same if you just touched the two wires together.
 
-To connect the Morse key to the GPIO pins, we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is used when you want to supply voltage to a device like an LED or buzzer. If we use input mode, a GPIO pin has a value that we can read in our code. If the pin has voltage going into it, the reading will be `1` (HIGH); if the pin was connected directly to ground (no voltage), the reading will be `0` (LOW). 
+To connect the Morse key to the GPIO pins, we need to do a bit of physical computing. GPIO pins can be set up as an input or an output. Output mode is used when you want to supply voltage to a device like an LED or buzzer. If we use input mode instead, a GPIO pin has a value that we can read in our code. If the pin has voltage going into it, the reading would be `1` (HIGH); if the pin was connected directly to ground (no voltage), the reading would be `0` (LOW). 
 
 The goal is to use the Morse Code key to switch voltage on and off for a GPIO pin, thus making the reading of the pin change in our code when we press the key.
 
-When a GPIO pin is in input mode the pin is said to be floating, meaning that it has no fixed voltage level. That's no good for what we want, as the pin will randomly float between HIGH and LOW. We need to categorically know that the key is either up or down. So we need to fix the voltage level to HIGH or LOW, and then make it change only when the key is pressed.
-
-We can do this in two ways.
+When a GPIO pin is in input mode the pin is said to be floating, meaning that it has no fixed voltage level. That's no good for what we want, as the pin will randomly float between HIGH and LOW. For this project, we need to know categorically whether the key is up or down. So we need to fix the voltage level to HIGH or LOW, and then make it change only when the key is pressed. We can do this in two ways.
 
 ### A pull up circuit
 
