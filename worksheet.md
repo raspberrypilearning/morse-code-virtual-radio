@@ -44,7 +44,7 @@ As this exercise involves noise, you should use headphones if you are in a class
 sudo amixer cset numid=3 1
 ```
 
-First, we need some code to make the tone sound. Enter the following command to start editing a blank file:
+First, we need some code to make the tone sound. Enter the following command to start editing a blank file (you should use Python 3 for this project):
 
 ```bash
 nano morse-code.py
@@ -153,7 +153,7 @@ Both methods will work equally well; which one people use is often just personal
 
 ![](images/jumper_wires_key.png) 
 
-Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. **Make a note of which configuration you're using as you'll need to incorporate it into your programming later**.
+Choose the pull up or down configuration you want to use and connect the female ends to the appropriate GPIO pins on your Raspberry Pi; use the above diagrams as a guide. Make a note of which configuration you're using as you'll need to incorporate it into your programming later. **In this worksheet, the examples given use a pull up configuration: you may use a pull down configuration if you wish, but remember that you will have to alter your code accordingly**.
 
 ## Detect the key position through the GPIO pin value
 
@@ -181,7 +181,7 @@ time.sleep(2)
 tone_obj.stop()
 ```
 
-Either copy and paste or enter the code below. Pay attention to the `GPIO.setup` command. This line is doing two things: it is setting pin 7 as an input, *and* setting the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `GPIO.PUD_DOWN` instead.
+Either copy and paste or enter the code below. Pay attention to the `GPIO.setup` command. This line is doing two things: it is setting pin 7 as an input, **and** setting the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `GPIO.PUD_DOWN` instead.
 
 There is then a `while` loop, which continually reads the state of pin 7 and prints HIGH or LOW to the screen every second.
 
@@ -204,7 +204,7 @@ GPIO functions require root access on your Pi, so from now on you must use the `
 sudo ./morse-code.py
 ```
 
-If you're using a pull up, the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down. The output should look something like this:
+If you're using a pull up configuration, the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down configuration. The output should look something like this:
 
 ```bash
 HIGH
@@ -224,11 +224,7 @@ Press `Ctrl + C` to quit.
 
 We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code is still very basic. All we have is a loop that keeps polling the pin; the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
-To do Morse Code properly, we need to respond every time the user presses or releases the key, by starting and stopping the tone sound.
-
-**TIP**: The more experienced people reading this will be thinking about using hardware interrupts here. This is done in the `RPi.GPIO` library with the `add_event_detect` and `wait_for_edge` functions. **Do not rush ahead and do this.** The use of hardware interrupts is problematic here. You will find that after some vigorous button bashing it cannot distinguish between a rising or falling edge, and your tone will play at the wrong times.
-
-The most reliable way to do this with the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
+For our Morse Code virtual radio to work, we need our program to respond every time the user presses or releases the key, by starting and stopping the tone sound. The most reliable way to do this with the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
 
 - Loop
   - Wait for key down
@@ -236,7 +232,7 @@ The most reliable way to do this with the `RPi.GPIO` library is to write a coupl
   - Wait for key up
   - Stop playing tone
 
-We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up, the logic in the `wait_for_keydown` function will be *while pin 7 is HIGH keep sleeping*; so while the key is up, the pin will be HIGH. When the key is pressed the pin goes LOW, and we can stop sleeping and start playing the tone. For a pull down, however, the logic would be *while pin 7 is LOW keep sleeping*. In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop. One hundredth of a second is ideal (0.01 seconds).
+We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up configuration, the logic in the `wait_for_keydown` function will be "while pin 7 is HIGH keep sleeping"; so while the key is up, the pin will be HIGH. When the key is pressed the pin goes LOW, and we can stop sleeping and start playing the tone. For a pull down configuration, however, the logic would be "while pin 7 is LOW keep sleeping". In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop: 0.01 seconds is ideal.
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
