@@ -44,7 +44,7 @@ As this exercise involves noise, you should use headphones if you are in a class
 sudo amixer cset numid=3 1
 ```
 
-First, we need some code to make the tone sound. Enter the following command to start editing a blank file (you should use Python 3 for this project):
+First, we need some code to make the tone sound. Enter the following command to start editing a blank file (please note that you should use Python 2 for this project):
 
 ```bash
 nano morse-code.py
