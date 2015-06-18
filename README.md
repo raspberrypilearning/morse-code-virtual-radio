@@ -56,14 +56,13 @@ A real Morse Code key will bring this project to life, especially if you can acq
 ## Worksheet & included files
 
 - [The worksheet](worksheet.md)
-- (Optional) Final version of Python code [final_code.py](./final_code.py)
+- (Optional) Final version of Python code [final_code.py](code/final_code.py) and [morse_lookup.py](code/morse_lookup.py)
     - Download to your Pi with the following commands:
 
     ```bash
-    wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/morse_lookup.py --no-check-certificate
-    wget https://raw.githubusercontent.com/raspberrypilearning/morse-code/master/final_code.py --no-check-certificate
-    chmod +x final_code.py
-    sudo ./final_code.py
+    wget https://goo.gl/K3Qlsa -O morse_lookup.py --no-check-certificate
+    wget https://goo.gl/ilZqWF -O final_code.py --no-check-certificate
+    sudo python final_code.py
     ```
 
 ## Licence
