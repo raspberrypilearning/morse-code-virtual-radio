@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from RPi import GPIO
-import thread
+import _thread as thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -20,7 +20,7 @@ class ToneSound(pygame.mixer.Sound):
         period = int(round(pygame.mixer.get_init()[0] / self.frequency))
         samples = array("h", [0] * period)
         amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
-        for time in xrange(period):
+        for time in range(period):
             if time < period / 2:
                 samples[time] = amplitude
             else:
