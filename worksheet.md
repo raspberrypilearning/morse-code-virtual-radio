@@ -53,7 +53,7 @@ nano morse-code.py
 Now either copy and paste or enter the following code:
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from array import array
@@ -72,7 +72,7 @@ class ToneSound(pygame.mixer.Sound):
         period = int(round(pygame.mixer.get_init()[0] / self.frequency))
         samples = array("h", [0] * period)
         amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
-        for time in xrange(period):
+        for time in range(period):
             if time < period / 2:
                 samples[time] = amplitude
             else:
@@ -451,14 +451,14 @@ while True:
 
 Double-check that your code is the same as the above. When you're done, press `Ctrl + O` then `Enter` to save. We're not finished editing, yet, though; do not run the code as it is. We still need to add code for the new thread.
 
-First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
+First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` lines. We need to add `_thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from RPi import GPIO
-import thread
+import _thread as thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -508,11 +508,11 @@ thread.start_new_thread(decoder_thread, ())
 The final code should look like the example below; remember to make the necessary changes if you're using a pull down configuration instead of pull up. 
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from RPi import GPIO
-import thread
+import _thread as thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -530,7 +530,7 @@ class ToneSound(pygame.mixer.Sound):
         period = int(round(pygame.mixer.get_init()[0] / self.frequency))
         samples = array("h", [0] * period)
         amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
-        for time in xrange(period):
+        for time in range(period):
             if time < period / 2:
                 samples[time] = amplitude
             else:
