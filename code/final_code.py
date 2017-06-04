@@ -54,8 +54,8 @@ def decoder_thread():
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
-pin = 7
-GPIO.setmode(GPIO.BOARD)
+pin = 4
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 DOT = "."
