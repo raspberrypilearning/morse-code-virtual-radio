@@ -185,7 +185,7 @@ Either copy and paste or enter the code below. Pay attention `key = gpio.Button(
 
 It also tells the class to set GPIO pin 4 as input, then set the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `pull_up=False` instead.
 
-Then, there is then a `while` loop, which continually reads the state of GPIO pin 4 and prints HIGH or LOW to the screen every second.
+Then, there is then a `while` loop, which continually reads the state of GPIO pin 4 and prints `ON` or `OFF` to the screen every second.
 
 ```python
 pin = 4
