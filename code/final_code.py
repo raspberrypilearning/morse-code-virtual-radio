@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import pygame
 import time
-from RPi import GPIO
+import gpiozero as gpio
 import _thread as thread
 from array import array
 from pygame.locals import *
@@ -27,14 +27,6 @@ class ToneSound(pygame.mixer.Sound):
                 samples[time] = -amplitude
         return samples
 
-def wait_for_keydown(pin):
-    while GPIO.input(pin):
-        time.sleep(0.01)
-
-def wait_for_keyup(pin):
-    while not GPIO.input(pin):
-        time.sleep(0.01)
-
 def decoder_thread():
     global key_up_time
     global buffer
@@ -55,8 +47,7 @@ def decoder_thread():
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
 pin = 4
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+key = gpio.Button(pin, pull_up=True)
 
 DOT = "."
 DASH = "-"
@@ -71,10 +62,10 @@ thread.start_new_thread(decoder_thread, ())
 print("Ready")
 
 while True:
-    wait_for_keydown(pin)
+    key.wait_for_press()
     key_down_time = time.time() #record the time when the key went down
     tone_obj.play(-1) #the -1 means to loop the sound
-    wait_for_keyup(pin)
+    key.wait_for_release()
     key_up_time = time.time() #record the time when the key was released
     key_down_length = key_up_time - key_down_time #get the length of time it was held down for
     tone_obj.stop()
