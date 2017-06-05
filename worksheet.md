@@ -44,7 +44,7 @@ As this exercise involves noise, you should use headphones if you are in a class
 sudo amixer cset numid=3 1
 ```
 
-First, we need some code to make the tone sound. Enter the following command to start editing a blank file (please note that you should use Python 2 for this project):
+First, we need some code to make the tone sound. Enter the following command to start editing a blank file (please note that you should use Python 3 for this project):
 
 ```bash
 nano morse-code.py
@@ -53,7 +53,7 @@ nano morse-code.py
 Now either copy and paste or enter the following code:
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from array import array
@@ -72,7 +72,7 @@ class ToneSound(pygame.mixer.Sound):
         period = int(round(pygame.mixer.get_init()[0] / self.frequency))
         samples = array("h", [0] * period)
         amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
-        for time in xrange(period):
+        for time in range(period):
             if time < period / 2:
                 samples[time] = amplitude
             else:
@@ -135,17 +135,17 @@ Wire the GPIO pin to 3.3 volts through a large 10kΩ resistor so that it always
   
 Note: The 1kΩ R2 resistor is there in both circuits to give the GPIO pin a fail-safe protection, in case we mistakenly set the pin to be in OUTPUT mode.
 
-Fortunately, the Raspberry Pi has all the above circuitry built in and we can select either a pull up or a pull down circuit in our code for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use pin #7 as an example:
+Fortunately, the Raspberry Pi has all the above circuitry built in and we can select either a pull up or a pull down circuit in our code for each GPIO pin. This sets up some internal circuitry that is too small for us to see. So you can get away with just using two jumper wires here, although you're welcome to wire it up the way shown above if you wish. Let's use GPIO pin #4 as an example:
 
 ### Pull up configuration
 
-  GPIO pin #7 will be wired to 3.3 volts using the internal pull up resistor, so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
+  GPIO pin #4 will be wired to 3.3 volts using the internal pull up resistor, so that it always reads HIGH. Then we can short the pin to ground via the Morse key, so that the pin will go LOW when you press it.
 
   ![](images/pull_up_key.png) 
 
 ### Pull down configuration
 
-  GPIO pin #7 will be wired to ground using the internal pull down resistor, so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse key, so that the pin will go HIGH when you press it.
+  GPIO pin #4 will be wired to ground using the internal pull down resistor, so that it always reads LOW. Then we can short the pin to 3.3 volts via the Morse key, so that the pin will go HIGH when you press it.
 
   ![](images/pull_down_key.png) 
 
@@ -181,13 +181,13 @@ time.sleep(2)
 tone_obj.stop()
 ```
 
-Either copy and paste or enter the code below. Pay attention to the `GPIO.setup` command. This line is doing two things: it is setting pin 7 as an input, **and** setting the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `GPIO.PUD_DOWN` instead.
+Either copy and paste or enter the code below. Pay attention to the `GPIO.setup` command. This line is doing two things: it is setting GPIO pin 4 as an input, **and** setting the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `GPIO.PUD_DOWN` instead.
 
-There is then a `while` loop, which continually reads the state of pin 7 and prints HIGH or LOW to the screen every second.
+There is then a `while` loop, which continually reads the state of GPIO pin 4 and prints HIGH or LOW to the screen every second.
 
 ```python
-pin = 7
-GPIO.setmode(GPIO.BOARD)
+pin = 4
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
@@ -232,7 +232,7 @@ For our Morse Code virtual radio to work, we need our program to respond every t
   - Wait for key up
   - Stop playing tone
 
-We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up configuration, the logic in the `wait_for_keydown` function will be "while pin 7 is HIGH keep sleeping"; so while the key is up, the pin will be HIGH. When the key is pressed the pin goes LOW, and we can stop sleeping and start playing the tone. For a pull down configuration, however, the logic would be "while pin 7 is LOW keep sleeping". In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop: 0.01 seconds is ideal.
+We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up configuration, the logic in the `wait_for_keydown` function will be "while GPIO 4 is HIGH keep sleeping"; so while the key is up, the pin will be HIGH. When the key is pressed the pin goes LOW, and we can stop sleeping and start playing the tone. For a pull down configuration, however, the logic would be "while GPIO 4 is LOW keep sleeping". In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop: 0.01 seconds is ideal.
 
 The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
 
@@ -249,8 +249,8 @@ def wait_for_keyup(pin):
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
-pin = 7
-GPIO.setmode(GPIO.BOARD)
+pin = 4
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 print("Ready")
@@ -315,8 +315,8 @@ def wait_for_keyup(pin):
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
-pin = 7
-GPIO.setmode(GPIO.BOARD)
+pin = 4
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 DOT = "."
@@ -451,14 +451,14 @@ while True:
 
 Double-check that your code is the same as the above. When you're done, press `Ctrl + O` then `Enter` to save. We're not finished editing, yet, though; do not run the code as it is. We still need to add code for the new thread.
 
-First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` line. We need to add `thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
+First we need to add some new imports to the top of our file. Scroll up to the top and find the `import` lines. We need to add `_thread` to do multithreading and `from morse_lookup import *` to give us access to the lookup code we downloaded earlier. The code should now look like this:
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from RPi import GPIO
-import thread
+import _thread as thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -508,11 +508,11 @@ thread.start_new_thread(decoder_thread, ())
 The final code should look like the example below; remember to make the necessary changes if you're using a pull down configuration instead of pull up. 
 
 ```python
-#!/usr/bin/python
+#!/usr/bin/python3
 import pygame
 import time
 from RPi import GPIO
-import thread
+import _thread as thread
 from array import array
 from pygame.locals import *
 from morse_lookup import *
@@ -530,7 +530,7 @@ class ToneSound(pygame.mixer.Sound):
         period = int(round(pygame.mixer.get_init()[0] / self.frequency))
         samples = array("h", [0] * period)
         amplitude = 2 ** (abs(pygame.mixer.get_init()[1]) - 1) - 1
-        for time in xrange(period):
+        for time in range(period):
             if time < period / 2:
                 samples[time] = amplitude
             else:
@@ -564,8 +564,8 @@ def decoder_thread():
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
-pin = 7
-GPIO.setmode(GPIO.BOARD)
+pin = 4
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 DOT = "."
