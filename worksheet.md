@@ -163,9 +163,9 @@ Enter the following command to edit our previous tone program:
 nano morse-code.py
 ```
 
-To give us access to the GPIO pins in our code, we need to import the `RPi.GPIO` library.
+To give us access to the GPIO pins in our code, we need to import the `gpiozero` library.
 
-Add `RPi.GPIO as GPIO` to the `import` line at the top so that it reads:
+Add `gpiozero as gpio` to the `import` line at the top so that it reads:
 
 ```python
 import pygame
@@ -181,42 +181,39 @@ time.sleep(2)
 tone_obj.stop()
 ```
 
-Either copy and paste or enter the code below. Pay attention to the `GPIO.setup` command. This line is doing two things: it is setting GPIO pin 4 as an input, **and** setting the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `GPIO.PUD_DOWN` instead.
+Either copy and paste or enter the code below. Pay attention `key = gpio.Button(pin, pull_up=True)` line. This assigns the variable `key` to an *instance* of the class `gpio.Button`. The `gpio.Button` class holds all the important information about how to read inputs from the button, and comes with some *methods*, which are like functions, but are attached to the instance of the class, and can access its internal variables.
 
-There is then a `while` loop, which continually reads the state of GPIO pin 4 and prints HIGH or LOW to the screen every second.
+It also tells the class to set GPIO pin 4 as input, then set the internal pull up resistor on it. If you want to use the pull down resistor, you'll need to use `pull_up=False` instead.
+
+Then, there is then a `while` loop, which continually reads the state of GPIO pin 4 and prints HIGH or LOW to the screen every second.
 
 ```python
 pin = 4
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+key = gpio.Button(pin, pull_up=True)
 
 while True:
-    reading = GPIO.input(pin)
-    print("HIGH" if reading else "LOW")
+    reading = key.is_pressed
+    print("ON" if reading else "OFF")
     time.sleep(1)
 ```
 
 Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
-GPIO functions require root access on your Pi, so from now on you must use the `sudo` command to run your code. If you don't use `sudo` you'll see the following error: `No access to dev/mem. Try running as root!`
+If you've set the `pull_up` parameter to the right value, the program should show OFF when the key is up. Hold it down for a few seconds and it will show ON. The output should look something like this:
 
 ```bash
-sudo ./morse-code.py
+OFF
+OFF
+OFF
+ON
+ON
+ON
+OFF
+OFF
+OFF
 ```
 
-If you're using a pull up configuration, the program should show HIGH when the key is up. Hold the button down for a few seconds and it will show LOW. It will be the opposite way around if you're using a pull down configuration. The output should look something like this:
-
-```bash
-HIGH
-HIGH
-HIGH
-LOW
-LOW
-LOW
-HIGH
-HIGH
-HIGH
-```
+If it is the other way round (it shows `ON` when the key is up and vice-versa), change the value of the `pull_up` parameter, then retry.
 
 Press `Ctrl + C` to quit.
 
@@ -224,7 +221,7 @@ Press `Ctrl + C` to quit.
 
 We've now proven that the value of the GPIO pin is changing when we press the Morse key, so the electronics is done. But our code is still very basic. All we have is a loop that keeps polling the pin; the code doesn't actually respond to the press or release of the key yet. You'll notice that you can press and release the key many times within one second.
 
-For our Morse Code virtual radio to work, we need our program to respond every time the user presses or releases the key, by starting and stopping the tone sound. The most reliable way to do this with the `RPi.GPIO` library is to write a couple of functions which hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
+For our Morse Code virtual radio to work, we need our program to respond every time the user presses or releases the key, by starting and stopping the tone sound. The `Button` class we created earlier already has a couple of methods to hold up the execution of your code until the key has been pressed or released. The overall goal here would be the following algorithm:
 
 - Loop
   - Wait for key down
@@ -232,51 +229,42 @@ For our Morse Code virtual radio to work, we need our program to respond every t
   - Wait for key up
   - Stop playing tone
 
-We can do this by defining two functions called `wait_for_keyup` and `wait_for_keydown`. These functions will use a `while` loop that will make the Pi sleep until the pin state has changed. You need to be mindful of the pull up or down configuration you're using. For example, if you're using a pull up configuration, the logic in the `wait_for_keydown` function will be "while GPIO 4 is HIGH keep sleeping"; so while the key is up, the pin will be HIGH. When the key is pressed the pin goes LOW, and we can stop sleeping and start playing the tone. For a pull down configuration, however, the logic would be "while GPIO 4 is LOW keep sleeping". In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop: 0.01 seconds is ideal.
+To wait for the press, we use two methods built into the `Button` class called `wait_for_press` and `wait_for_release`, which will make the Pi sleep until the pin state has changed. In order to have a good response time, we only need to sleep for a very short amount of time for each iteration of the loop: 0.01 seconds is ideal.
 
-The `wait_for_keyup` function will then be the same but will have the opposite logic to whatever is in `wait_for_keydown`.
-
-Have a look at the code below. Remember that this is for a pull up configuration; if you're using a pull down configuration, your `GPIO.setup` line will have `GPIO.PUD_DOWN`, and you would need to move the `not` keyword from `wait_for_keyup` into the same place in `wait_for_keydown`.
+Have a look at the code below. Remember that this is for a pull up configuration; if you're using a pull down configuration, change the part that says `gpio.Button(pin, pull_up=True)` to `gpio.Button(pin, pull_up=False)`.
 
 ```python
-def wait_for_keydown(pin):
-    while GPIO.input(pin):
-        time.sleep(0.01)
-	
-def wait_for_keyup(pin):
-    while not GPIO.input(pin):
-        time.sleep(0.01)
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
 pin = 4
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+key = gpio.Button(pin, pull_up=True)
 
 print("Ready")
 
 while True:
-    wait_for_keydown(pin)
+    key.wait_for_press()
     tone_obj.play(-1) #the -1 means to loop the sound
-    wait_for_keyup(pin)
+    key.wait_for_release()
     tone_obj.stop()
+
 ```
 
 Enter the following command to edit our previous program:
 
 `nano morse-code.py`
 
-Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above. Remember to make the necessary modifications iw you are using a pull-down configuration.
+Leave the `ToneSound` class at the top of your program, scroll to the bottom, delete the previous `while` loop code and then add the code above. Remember to make the necessary modifications if you are using a pull-down configuration.
 
 Press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit.
 
-You can now test your code. Remember to use the `sudo` command.
+You can now test your code.
 
 ```bash
-sudo ./morse-code.py
+./morse-code.py
 ```
 
-After the you see the `Ready` message you should be able to start keying in your first Morse Code messages. Test the Morse key to make sure that the tone is only ever on when the key is down, and off when the key is up. If you've got it the wrong way around, check the logic in your `wait_for_keyup` and `wait_for_keydown` functions. You may just need to move the `not` keyword.
+After the you see the `Ready` message, you should be able to start keying in your first Morse Code messages. Test the Morse key to make sure that the tone is only ever on when the key is down, and off when the key is up. If you've got it the wrong way around, check again to see if you have the `pull_up` parameter set correctly.
 
 Now have a go at a short word. Early Nokia mobile phones used the Morse Code for SMS when a text message arrived. This is a really easy one to do; the Morse Code for SMS is `... -- ...`. Try keying in other words using the chart at the top.
 
@@ -305,19 +293,11 @@ The aim is to time how long the key is held down for. Generally speaking, a dot 
 Take a look at the code below; notice the the use of the `key_down_time` and `key_down_length` variables.
 
 ```python
-def wait_for_keydown(pin):
-    while GPIO.input(pin):
-        time.sleep(0.01)
-	
-def wait_for_keyup(pin):
-    while not GPIO.input(pin):
-        time.sleep(0.01)
 
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
 pin = 4
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+key = gpio.Button(pin, pull_up=True)
 
 DOT = "."
 DASH = "-"
@@ -328,13 +308,13 @@ key_down_length = 0
 print("Ready")
 
 while True:
-    wait_for_keydown(pin)
+    key.wait_for_press()
     key_down_time = time.time() #record the time when the key went down
     tone_obj.play(-1) #the -1 means to loop the sound
-    wait_for_keyup(pin)
-    key_down_length = time.time() - key_down_time #get the length of time it was held down for
+    key.wait_for_release()
+    key_down_length = key_up_time - key_down_time #get the length of time it was held down for
     tone_obj.stop()
-    
+
     if key_down_length > 0.15:
         print(DASH)
     else:
@@ -347,10 +327,10 @@ Enter the following command to edit our previous program:
 nano morse-code.py
 ```
 
-Scroll to the bottom and add the lines shown above that are missing from your original code. If necessary, modify the code for a pull down configuration. When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code. Remember to use the `sudo` command.
+Scroll to the bottom and add the lines shown above that are missing from your original code. If necessary, modify the code for a pull down configuration. When you're done press `Ctrl + O` then `Enter` to save followed by `Ctrl + X` to quit. You can now test your code.
 
 ```bash
-sudo ./morse-code.py
+./morse-code.py
 ```
 
 Use the Morse key to make some long and short tones. You should see dots and dashes appearing at the moment when you release the key. The output will look something like this:
@@ -439,12 +419,12 @@ buffer = []
 print("Ready")
 
 while True:
-    wait_for_keydown(pin)
+    key.wait_for_press()
     key_down_time = time.time() #record the time when the key went down
     tone_obj.play(-1) #the -1 means to loop the sound
-    wait_for_keyup(pin)
+    key.wait_for_release()
     key_up_time = time.time() #record the time when the key was released
-    key_down_length = time.time() - key_down_time #get the length of time it was held down for
+    key_down_length = key_up_time - key_down_time #get the length of time it was held down for
     tone_obj.stop()
     buffer.append(DASH if key_down_length > 0.15 else DOT)
 ```
@@ -457,7 +437,7 @@ First we need to add some new imports to the top of our file. Scroll up to the t
 #!/usr/bin/python3
 import pygame
 import time
-from RPi import GPIO
+import gpiozero as gpio
 import _thread as thread
 from array import array
 from pygame.locals import *
@@ -511,7 +491,7 @@ The final code should look like the example below; remember to make the necessar
 #!/usr/bin/python3
 import pygame
 import time
-from RPi import GPIO
+import gpiozero as gpio
 import _thread as thread
 from array import array
 from pygame.locals import *
@@ -537,14 +517,6 @@ class ToneSound(pygame.mixer.Sound):
                 samples[time] = -amplitude
         return samples
 
-def wait_for_keydown(pin):
-    while GPIO.input(pin):
-        time.sleep(0.01)
-
-def wait_for_keyup(pin):
-    while not GPIO.input(pin):
-        time.sleep(0.01)
-
 def decoder_thread():
     global key_up_time
     global buffer
@@ -565,8 +537,7 @@ def decoder_thread():
 tone_obj = ToneSound(frequency = 800, volume = .5)
 
 pin = 4
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+key = gpio.Button(pin, pull_up=True)
 
 DOT = "."
 DASH = "-"
@@ -581,10 +552,10 @@ thread.start_new_thread(decoder_thread, ())
 print("Ready")
 
 while True:
-    wait_for_keydown(pin)
+    key.wait_for_press()
     key_down_time = time.time() #record the time when the key went down
     tone_obj.play(-1) #the -1 means to loop the sound
-    wait_for_keyup(pin)
+    key.wait_for_release()
     key_up_time = time.time() #record the time when the key was released
     key_down_length = key_up_time - key_down_time #get the length of time it was held down for
     tone_obj.stop()
@@ -593,10 +564,8 @@ while True:
 
 When you're done, press `Ctrl + O` then `Enter` to save, followed by `Ctrl + X` to quit. You can now test your code. 
 
-Remember to use the `sudo` command.
-
 ```bash
-sudo ./morse-code.py
+./morse-code.py
 ```
 
 Wait for the `Ready` message to show and then begin keying Morse Code in. The trick is to watch the screen and wait for a letter to appear before you start keying in the next one. You may wish to refer to the charts at the top of this page.
@@ -611,7 +580,7 @@ The output should look like this:
 SOS HELLO 
 ```
 
-Press `Ctrl + C` to quit.
+Press `Ctrl + C` twice to quit.
 
 You can ignore the message saying `Unhandled exception in thread`; this is just the child thread being terminated when you send the `KeyboardInterrupt` with `Ctrl + C`.
 
