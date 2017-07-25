@@ -1,0 +1,27 @@
+---
+title: Morse Code Virtual Radio
+hero_image: images/banner.png
+description: 
+original_url: https://raspberrypi.org/learning/morse-code-virtual-radio
+theme: red
+duration: 2
+listed: false
+ingredient: false
+copyedit: true
+curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
+interests: ''
+technologies: rpi, physical computing, python
+site_areas: ''
+steps:
+- title: Introduction
+- title: What you will need
+- title: Morse Code Virtual Radio
+- title: What is Morse Code?
+- title: Play a test beep
+- title: Connect the Morse Code key to the GPIO pins
+- title: Detect the key position through the GPIO pin value
+- title: Play a tone when the key is down
+- title: Decode the Morse as you go
+- title: Play a listening game with a friend
+- title: What next?
+
